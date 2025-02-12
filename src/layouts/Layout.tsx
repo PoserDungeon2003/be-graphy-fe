@@ -10,9 +10,9 @@ export const Layout: React.FC<LayoutProps> = ({
   return (
     <>
       <Header />
-      <main className="flex-1">
-        {children}
-      </main>
+      <div className="flex-1">
+      {children}
+      </div>
       <Footer />
     </>
   )
