@@ -1,10 +1,10 @@
 import './App.css'
 import { BrowserRouter, Outlet, Route, Routes } from 'react-router'
-import Home from './pages/Home'
-import Login from './pages/Login'
 import { Layout } from './layouts'
 import { QueryCache, QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { useState } from 'react'
+import Home from './pages/home'
+import Login from './pages/login'
 
 function App() {
   const [queryClient] = useState(
