@@ -32,7 +32,4 @@ const tseslintConfig = tseslint.config(
   },
 );
 
-export default [
-  tseslintConfig,
-  eslintConfigPrettier,
-];
+export default [tseslintConfig, eslintConfigPrettier];
