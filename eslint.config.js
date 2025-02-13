@@ -6,7 +6,7 @@ import tseslint from "typescript-eslint";
 import eslintConfigPrettier from "eslint-config-prettier";
 import react from "eslint-plugin-react";
 
-const tseslint = tseslint.config(
+const tseslintConfig = tseslint.config(
   { ignores: ["dist"] },
   {
     extends: [js.configs.recommended, ...tseslint.configs.recommended],
@@ -31,6 +31,6 @@ const tseslint = tseslint.config(
 );
 
 export default [
-  tseslint,
+  tseslintConfig,
   eslintConfigPrettier,
 ];
