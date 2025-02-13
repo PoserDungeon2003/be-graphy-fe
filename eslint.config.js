@@ -7,6 +7,8 @@ import eslintConfigPrettier from "eslint-config-prettier";
 import react from "eslint-plugin-react";
 
 const tseslintConfig = tseslint.config(
+  js.configs.recommended,
+  tseslint.configs.stylisticTypeChecked,
   { ignores: ["dist"] },
   {
     extends: [js.configs.recommended, ...tseslint.configs.recommended],
