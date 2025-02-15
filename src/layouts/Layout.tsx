@@ -8,7 +8,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <>
       <Header />
-      <div className="flex-1">{children}</div>
+      <main className="grow">{children}</main>
       <Footer />
     </>
   );
