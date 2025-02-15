@@ -8,7 +8,7 @@ import {
   IoSearchOutline,
   IoThumbsUp,
 } from "react-icons/io5";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 const landscape = [
   {
@@ -62,6 +62,8 @@ const food = [
 ];
 
 export default function Home() {
+  const navigate = useNavigate();
+
   return (
     <main className="flex h-full w-full flex-col pb-10">
       <div className="relative flex h-full w-full flex-col justify-between">
@@ -111,6 +113,7 @@ export default function Home() {
                   src="/images/button/btn_login.png"
                   alt="login"
                   className="h-full w-1/4 cursor-pointer"
+                  onClick={() => navigate("/login")}
                 />
               </div>
             </div>
