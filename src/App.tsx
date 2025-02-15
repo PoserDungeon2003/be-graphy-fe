@@ -1,14 +1,15 @@
-import "./App.css";
-import { BrowserRouter, Outlet, Route, Routes } from "react-router";
-import { Layout } from "./layouts";
 import {
   QueryCache,
   QueryClient,
   QueryClientProvider,
 } from "@tanstack/react-query";
 import { useState } from "react";
+import { BrowserRouter, Outlet, Route, Routes } from "react-router";
+import "./App.css";
+import { Layout } from "./layouts";
 import Home from "./pages/home";
 import Login from "./pages/login";
+import Register from "./pages/Register";
 
 function App() {
   const [queryClient] = useState(
@@ -44,6 +45,7 @@ function App() {
           >
             <Route index element={<Home />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Register />} />
           </Route>
         </Routes>
       </BrowserRouter>

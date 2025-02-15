@@ -1,5 +1,4 @@
 import _ from "lodash";
-import { useState } from "react";
 import {
   IoArrowForward,
   IoChevronBack,
@@ -108,6 +107,7 @@ export default function Home() {
                   src="/images/button/btn_signup.png"
                   alt="signup"
                   className="h-full w-1/4 cursor-pointer"
+                  onClick={() => navigate("/signup")}
                 />
                 <img
                   src="/images/button/btn_login.png"
