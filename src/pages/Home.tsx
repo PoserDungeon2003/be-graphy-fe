@@ -43,6 +43,24 @@ const landscape = [
   },
 ];
 
+const food = [
+  {
+    imgUrl: "/images/food/food-1.png",
+    title: "Food 1",
+    author: "Author 1",
+  },
+  {
+    imgUrl: "/images/food/food-2.png",
+    title: "Food 2",
+    author: "Author 2",
+  },
+  {
+    imgUrl: "/images/food/food-3.png",
+    title: "Food 3",
+    author: "Author 3",
+  },
+];
+
 export default function Home() {
   return (
     <main className="flex h-full w-full flex-col pb-10">
@@ -183,7 +201,7 @@ export default function Home() {
       </div>
       <div className="z-20 pt-10">
         <div className="flex w-full items-center justify-between gap-4">
-          <div className="flex w-fit items-center justify-center gap-2 rounded-r-full bg-gradient-to-r from-cyan-300 to-blue-300 px-6 py-1 text-lg font-bold text-black">
+          <div className="flex w-fit items-center justify-center gap-2 rounded-r-full bg-gradient-to-r from-cyan-300 to-indigo-300 px-6 py-1 text-lg font-bold text-black">
             <IoOptionsOutline className="size-8" />
             <span>Filter</span>
             <div></div>
@@ -197,7 +215,7 @@ export default function Home() {
             <span>Recommend</span>
           </div>
         </div>
-        <div className="grid grid-cols-3 gap-4 px-4 pt-4">
+        <div className="grid grid-cols-3 gap-4 px-4 pt-8">
           {_.map(landscape, (item, index) => (
             <div
               key={index}
@@ -213,7 +231,76 @@ export default function Home() {
                   <span className="text-lg font-semibold text-black">
                     {item.title}
                   </span>
-                  <span className="font-boldwwwww text-sm text-black">
+                  <span className="text-sm font-bold text-black">
+                    {item.author}
+                  </span>
+                </div>
+                <div className="flex w-1/3 items-center justify-end gap-8">
+                  <IoThumbsUp className="size-4 cursor-pointer text-indigo-500" />
+                  <IoEye className="size-4 cursor-pointer text-indigo-500" />
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div className="grid grid-cols-3 gap-4 px-4 pt-20">
+          {_.map(landscape, (item, index) => (
+            <div
+              key={index}
+              className="flex flex-col items-center justify-center gap-2"
+            >
+              <img
+                src={item.imgUrl}
+                alt={item.title}
+                className="w-full rounded-4xl drop-shadow-lg"
+              />
+              <div className="flex w-full items-center justify-between px-4">
+                <div className="flex w-2/3 flex-col">
+                  <span className="text-lg font-semibold text-black">
+                    {item.title}
+                  </span>
+                  <span className="text-sm font-bold text-black">
+                    {item.author}
+                  </span>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div className="pt-10">
+        <div className="flex w-full items-center justify-between gap-4">
+          <div className="flex w-fit items-center justify-center gap-2 rounded-r-full bg-gradient-to-r from-cyan-300 to-indigo-300 px-6 py-1 text-lg font-bold text-black">
+            <IoOptionsOutline className="size-8" />
+            <span>Filter</span>
+            <div></div>
+          </div>
+          <div className="flex w-1/2 items-center justify-between gap-2 rounded-full bg-gradient-to-r from-green-200 to-blue-300 px-4 py-1 text-lg font-bold text-black">
+            <IoSearchOutline className="size-8" />
+            <span>Food</span>
+            <div></div>
+          </div>
+          <div className="flex w-fit items-center justify-center gap-2 rounded-l-full bg-gradient-to-r from-green-200 to-green-300 px-6 py-1 text-lg font-bold text-black">
+            <span>Recommend</span>
+          </div>
+        </div>
+        <div className="grid grid-cols-3 gap-6 px-4 pt-8">
+          {_.map(food, (item, index) => (
+            <div
+              key={index}
+              className="flex flex-col items-center justify-center gap-2"
+            >
+              <img
+                src={item.imgUrl}
+                alt={item.title}
+                className="w-full rounded-4xl drop-shadow-lg"
+              />
+              <div className="flex w-full items-center justify-between px-4">
+                <div className="flex w-2/3 flex-col">
+                  <span className="text-lg font-semibold text-black">
+                    {item.title}
+                  </span>
+                  <span className="text-sm font-bold text-black">
                     {item.author}
                   </span>
                 </div>
