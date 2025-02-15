@@ -1,6 +1,47 @@
+import _ from "lodash";
 import { useState } from "react";
-import { IoArrowForward, IoChevronBack } from "react-icons/io5";
+import {
+  IoArrowForward,
+  IoChevronBack,
+  IoEye,
+  IoOptionsOutline,
+  IoSearchOutline,
+  IoThumbsUp,
+} from "react-icons/io5";
 import { Link } from "react-router";
+
+const landscape = [
+  {
+    imgUrl: "/images/landscape/landscape-1.png",
+    title: "Landscape 1",
+    author: "Author 1",
+  },
+  {
+    imgUrl: "/images/landscape/landscape-2.png",
+    title: "Landscape 2",
+    author: "Author 2",
+  },
+  {
+    imgUrl: "/images/landscape/landscape-3.png",
+    title: "Landscape 3",
+    author: "Author 3",
+  },
+  {
+    imgUrl: "/images/landscape/landscape-4.png",
+    title: "Landscape 4",
+    author: "Author 4",
+  },
+  {
+    imgUrl: "/images/landscape/landscape-5.png",
+    title: "Landscape 5",
+    author: "Author 5",
+  },
+  {
+    imgUrl: "/images/landscape/landscape-6.png",
+    title: "Landscape 6",
+    author: "Author 6",
+  },
+];
 
 export default function Home() {
   return (
@@ -135,9 +176,54 @@ export default function Home() {
               />
             </div>
           </div>
-          <Link to={"/"} className="font-bold text-black underline">
+          <Link to={"/"} className="z-20 font-bold text-black underline">
             Next Pages
           </Link>
+        </div>
+      </div>
+      <div className="z-20 pt-10">
+        <div className="flex w-full items-center justify-between gap-4">
+          <div className="flex w-fit items-center justify-center gap-2 rounded-r-full bg-gradient-to-r from-cyan-300 to-blue-300 px-6 py-1 text-lg font-bold text-black">
+            <IoOptionsOutline className="size-8" />
+            <span>Filter</span>
+            <div></div>
+          </div>
+          <div className="flex w-1/2 items-center justify-between gap-2 rounded-full bg-gradient-to-r from-green-200 to-blue-300 px-4 py-1 text-lg font-bold text-black">
+            <IoSearchOutline className="size-8" />
+            <span>Landscape</span>
+            <div></div>
+          </div>
+          <div className="flex w-fit items-center justify-center gap-2 rounded-l-full bg-gradient-to-r from-green-200 to-green-300 px-6 py-1 text-lg font-bold text-black">
+            <span>Recommend</span>
+          </div>
+        </div>
+        <div className="grid grid-cols-3 gap-4 px-4 pt-4">
+          {_.map(landscape, (item, index) => (
+            <div
+              key={index}
+              className="flex flex-col items-center justify-center gap-2"
+            >
+              <img
+                src={item.imgUrl}
+                alt={item.title}
+                className="w-full rounded-4xl drop-shadow-lg"
+              />
+              <div className="flex w-full items-center justify-between px-4">
+                <div className="flex w-2/3 flex-col">
+                  <span className="text-lg font-semibold text-black">
+                    {item.title}
+                  </span>
+                  <span className="font-boldwwwww text-sm text-black">
+                    {item.author}
+                  </span>
+                </div>
+                <div className="flex w-1/3 items-center justify-end gap-8">
+                  <IoThumbsUp className="size-4 cursor-pointer text-indigo-500" />
+                  <IoEye className="size-4 cursor-pointer text-indigo-500" />
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </main>
