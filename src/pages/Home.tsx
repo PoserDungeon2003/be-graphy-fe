@@ -65,7 +65,7 @@ export default function Home() {
   const navigate = useNavigate();
 
   return (
-    <main className="flex h-full w-full flex-col pb-10">
+    <div className="flex h-full w-full flex-col pb-10">
       <div className="relative flex h-full w-full flex-col justify-between">
         <div className="flex w-1/2 flex-col">
           <img
@@ -316,6 +316,6 @@ export default function Home() {
           ))}
         </div>
       </div>
-    </main>
+    </div>
   );
 }

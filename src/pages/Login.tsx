@@ -3,7 +3,7 @@ import { Link } from "react-router";
 
 export default function Login() {
   return (
-    <div className="relative flex w-full h-full flex-col items-center justify-center overflow-y-hidden">
+    <div className="relative flex h-full w-full flex-col items-center justify-center overflow-y-hidden">
       <div className="absolute top-0 left-0 mt-4 ml-4">
         <Link
           to={"/"}
