@@ -1,19 +1,15 @@
+import { Footer, Header } from "../components";
+
 type LayoutProps = {
   children: React.ReactElement | React.ReactNode;
-}
+};
 
-export const Layout = ({ children }: LayoutProps) => {
+export const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
-    <div>
-      <header>
-        <h1>Header</h1>
-      </header>
-      <main>
-        {children}
-      </main>
-      <footer>
-        <h1>Footer</h1>
-      </footer>
-    </div>
-  )
-}
+    <>
+      <Header />
+      <div className="flex-1">{children}</div>
+      <Footer />
+    </>
+  );
+};
