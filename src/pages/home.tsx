@@ -9,6 +9,7 @@ import {
   IoThumbsUp,
 } from "react-icons/io5";
 import { Link, useNavigate } from "react-router";
+import { PhotoPost } from "../components";
 
 const landscape = [
   {
@@ -221,54 +222,12 @@ export default function Home() {
         </div>
         <div className="grid grid-cols-3 gap-4 px-4 pt-8">
           {_.map(landscape, (item, index) => (
-            <div
-              key={index}
-              className="flex flex-col items-center justify-center gap-2"
-            >
-              <img
-                src={item.imgUrl}
-                alt={item.title}
-                className="w-full rounded-4xl drop-shadow-lg"
-              />
-              <div className="flex w-full items-center justify-between px-4">
-                <div className="flex w-2/3 flex-col">
-                  <span className="text-lg font-semibold text-black">
-                    {item.title}
-                  </span>
-                  <span className="text-sm font-bold text-black">
-                    {item.author}
-                  </span>
-                </div>
-                <div className="flex w-1/3 items-center justify-end gap-8">
-                  <IoThumbsUp className="size-4 cursor-pointer text-indigo-500" />
-                  <IoEye className="size-4 cursor-pointer text-indigo-500" />
-                </div>
-              </div>
-            </div>
+            <PhotoPost key={index} {...item} actionButtons />
           ))}
         </div>
         <div className="grid grid-cols-3 gap-4 px-4 pt-20">
           {_.map(landscape, (item, index) => (
-            <div
-              key={index}
-              className="flex flex-col items-center justify-center gap-2"
-            >
-              <img
-                src={item.imgUrl}
-                alt={item.title}
-                className="w-full rounded-4xl drop-shadow-lg"
-              />
-              <div className="flex w-full items-center justify-between px-4">
-                <div className="flex w-2/3 flex-col">
-                  <span className="text-lg font-semibold text-black">
-                    {item.title}
-                  </span>
-                  <span className="text-sm font-bold text-black">
-                    {item.author}
-                  </span>
-                </div>
-              </div>
-            </div>
+            <PhotoPost key={index} {...item} />
           ))}
         </div>
       </div>
@@ -290,30 +249,7 @@ export default function Home() {
         </div>
         <div className="grid grid-cols-3 gap-6 px-4 pt-8">
           {_.map(food, (item, index) => (
-            <div
-              key={index}
-              className="flex flex-col items-center justify-center gap-2"
-            >
-              <img
-                src={item.imgUrl}
-                alt={item.title}
-                className="w-full rounded-4xl drop-shadow-lg"
-              />
-              <div className="flex w-full items-center justify-between px-4">
-                <div className="flex w-2/3 flex-col">
-                  <span className="text-lg font-semibold text-black">
-                    {item.title}
-                  </span>
-                  <span className="text-sm font-bold text-black">
-                    {item.author}
-                  </span>
-                </div>
-                <div className="flex w-1/3 items-center justify-end gap-8">
-                  <IoThumbsUp className="size-4 cursor-pointer text-indigo-500" />
-                  <IoEye className="size-4 cursor-pointer text-indigo-500" />
-                </div>
-              </div>
-            </div>
+            <PhotoPost key={index} {...item} actionButtons />
           ))}
         </div>
       </div>
