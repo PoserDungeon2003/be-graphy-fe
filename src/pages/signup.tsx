@@ -1,26 +1,31 @@
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from "react-hook-form";
 import { IoChevronBackOutline } from "react-icons/io5";
 import { Link } from "react-router";
-import { useForm } from "react-hook-form";
-import { LoginRQ } from "../types";
-import { object, string } from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
+import { SignupRQ } from "../types";
+import { object, ref, string } from "yup";
 
 const schema = object({
+  name: string().required().trim(),
   email: string().email().required().trim(),
   password: string().required().trim(),
+  confirmPassword: string()
+    .oneOf([ref("password")], "Passwords must match")
+    .required()
+    .trim(),
 });
 
-export default function Login() {
+export default function Signup() {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<LoginRQ>({
+  } = useForm<SignupRQ>({
     mode: "onChange",
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = (data: LoginRQ) => {
+  const onSubmit = (data: SignupRQ) => {
     try {
       console.log(data);
     } catch (error: any) {
@@ -42,12 +47,13 @@ export default function Login() {
       <img
         src="/images/effect/gradient_green_r.png"
         alt="effect"
-        className="absolute top-0 right-0 -z-10 w-1/2"
+        className="absolute bottom-0 left-0 -z-10 w-1/2 rotate-180"
       />
       <h1 className="text-center text-4xl font-bold text-black uppercase">
         Be Graphy
       </h1>
       <form
+        autoComplete="off"
         onSubmit={handleSubmit(onSubmit)}
         className="mt-8 flex flex-col items-center justify-center gap-4"
       >
@@ -55,7 +61,26 @@ export default function Login() {
           <div className="relative">
             <img src="/images/background/bg_input.png" alt="input background" />
             <input
+              {...register("name")}
+              type="text"
+              name="name"
+              id="name"
+              placeholder="NAME"
+              className="focus:shadow-outline absolute inset-0 rounded-full px-6 leading-tight font-extrabold text-black focus:outline-none"
+            />
+          </div>
+          {errors.name && (
+            <span className="px-4 text-sm font-bold text-red-500">
+              {errors.name?.message}
+            </span>
+          )}
+        </div>
+        <div className="w-1/3 space-y-1">
+          <div className="relative">
+            <img src="/images/background/bg_input.png" alt="input background" />
+            <input
               {...register("email")}
+              autoComplete="new-email"
               type="email"
               name="email"
               id="email"
@@ -77,6 +102,7 @@ export default function Login() {
               type="password"
               name="password"
               id="password"
+              autoComplete="new-password"
               placeholder="PASSWORD"
               className="focus:shadow-outline absolute inset-0 rounded-full px-6 leading-tight font-extrabold text-black focus:outline-none"
             />
@@ -87,16 +113,34 @@ export default function Login() {
             </span>
           )}
         </div>
+        <div className="w-1/3 space-y-1">
+          <div className="relative">
+            <img src="/images/background/bg_input.png" alt="input background" />
+            <input
+              {...register("confirmPassword")}
+              type="password"
+              name="confirmPassword"
+              id="confirmPassword"
+              placeholder="CONFIRM PASSWORD"
+              className="focus:shadow-outline absolute inset-0 rounded-full px-6 leading-tight font-extrabold text-black focus:outline-none"
+            />
+          </div>
+          {errors.confirmPassword && (
+            <span className="px-4 text-sm font-bold text-red-500">
+              {errors.confirmPassword?.message}
+            </span>
+          )}
+        </div>
         <button
           type="submit"
-          className="mt-4 cursor-pointer rounded-full bg-indigo-400 px-12 py-3 font-bold text-white uppercase active:bg-indigo-500"
+          className="mt-4 cursor-pointer rounded-full bg-transparent px-12 py-3 font-bold text-[#6AD3F3] uppercase underline"
         >
-          Log in
+          Be now
         </button>
         <span className="font-bold text-black uppercase">
           Create account?{" "}
-          <Link to="/signup" className="font-bold text-[#6AD3F3] underline">
-            Sign up
+          <Link to="/login" className="font-bold text-[#6AD3F3] underline">
+            Sign in
           </Link>
         </span>
       </form>
