@@ -1,3 +1,4 @@
+import _ from "lodash";
 import { useRef } from "react";
 import { IoChevronBackOutline } from "react-icons/io5";
 import { Link } from "react-router";
@@ -31,7 +32,7 @@ export default function SignupVerify() {
   };
 
   return (
-    <div className="relative flex h-full w-full flex-col items-center justify-center gap-8 overflow-y-hidden">
+    <div className="relative flex h-full w-full flex-col items-center justify-center gap-8 xl:gap-12 overflow-y-hidden">
       <div className="absolute top-0 left-0 mt-4 ml-4">
         <Link
           to={"/"}
@@ -50,10 +51,10 @@ export default function SignupVerify() {
         <img
           src="/images/button/btn_gradient_blue_lg.png"
           alt="effect"
-          className="absolute inset-0 -top-1/2 -z-10"
+          className="absolute -z-10"
         />
         <img src="/images/icons/camera.png" alt="camera" className="absolute w-1/4 -left-5 -top-20" />
-        <h1 className="text-center text-4xl font-bold text-black">
+        <h1 className="relative text-center text-4xl font-bold text-black z-10">
           Account Verification
         </h1>
       </div>
@@ -62,7 +63,7 @@ export default function SignupVerify() {
       </span>
       <form className="flex flex-col items-center gap-4">
         <div className="flex items-center justify-between gap-8">
-          {[0, 1, 2, 3].map((_, index) => (
+          {_.map([0, 1, 2, 3], (index) => (
             <div key={index} className="relative w-32 h-16">
               <img
                 src="/images/background/bg_otp_input.png"
