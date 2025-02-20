@@ -20,7 +20,7 @@ const navBar = [
   },
   {
     name: "Chat box",
-    to: "/chatbox",
+    to: "/messenger",
   },
 ];
 
