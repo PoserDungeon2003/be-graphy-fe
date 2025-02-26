@@ -27,7 +27,7 @@ const footerContents = [
 
 export const Footer = () => {
   return (
-    <footer className="shrink-0 bg-gradient-to-r from-teal-700 to-green-600">
+    <footer className="relative shrink-0 bg-gradient-to-r from-[#0b9daa] to-[#66cc69] overflow-hidden">
       <div className="flex pt-2 pb-16">
         {_.map(footerContents, (content, index) => (
           <div key={index} className="ml-6 p-3">
@@ -46,6 +46,11 @@ export const Footer = () => {
           </div>
         ))}
       </div>
+      <img
+        src="/images/home/camera-animated.png"
+        alt="camera"
+        className="absolute max-w-1/8 right-0 top-0 mt-4"
+      />
     </footer>
   );
 };
