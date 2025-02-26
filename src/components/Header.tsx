@@ -26,7 +26,7 @@ const navBar = [
 
 export const Header = () => {
   return (
-    <header className="bg-gradient-to-r from-green-200 via-blue-300 to-blue-400">
+    <header className="bg-gradient-to-r from-[#cafbda] to-[#9bc1fb]">
       <nav className="ml-6 space-x-10 p-3">
         {_.map(navBar, (nav, index) => (
           <NavLink to={nav.to} key={index} className="p-3 text-white">

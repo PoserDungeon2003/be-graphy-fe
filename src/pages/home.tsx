@@ -101,7 +101,7 @@ export default function Home() {
                     alt="button"
                     className="h-full w-[89px]"
                   />
-                  <IoArrowForward className="absolute inset-0 top-3.5 left-8 size-5" />
+                  <IoArrowForward className="absolute top-1/3 left-1/3 size-5 translate-x-1/2" />
                 </button>
               </div>
               <div className="flex justify-around md:pt-12">
@@ -152,12 +152,8 @@ export default function Home() {
           className="absolute z-10"
         />
         <div className="flex flex-col items-center justify-center gap-10">
-          <div className="z relative w-1/2">
-            <img
-              src="/images/button/btn_gradient_blue_lg.png"
-              alt="background"
-            />
-            <span className="absolute inset-0 flex items-center justify-center text-2xl font-bold text-black uppercase">
+          <div className="mt-8 w-1/2 rounded-full bg-gradient-to-r from-[#cafcda] to-[#99bffc] px-6 py-4">
+            <span className="flex items-center justify-center text-2xl font-bold text-black uppercase">
               About us
             </span>
           </div>
@@ -206,17 +202,17 @@ export default function Home() {
       </div>
       <div className="z-20 pt-10">
         <div className="flex w-full items-center justify-between gap-4">
-          <div className="flex w-fit items-center justify-center gap-2 rounded-r-full bg-gradient-to-r from-cyan-300 to-indigo-300 px-6 py-1 text-lg font-bold text-black">
+          <div className="flex w-fit items-center justify-center gap-2 rounded-r-full bg-gradient-to-r from-[#a4cdf4] to-[#96bbfe] px-6 py-1 text-lg font-bold text-black">
             <IoOptionsOutline className="size-8" />
             <span>Filter</span>
             <div></div>
           </div>
-          <div className="flex w-1/2 items-center justify-between gap-2 rounded-full bg-gradient-to-r from-green-200 to-blue-300 px-4 py-1 text-lg font-bold text-black">
+          <div className="flex w-1/2 items-center justify-between gap-2 rounded-full bg-gradient-to-r from-[#cafcda] to-[#99bffc] px-4 py-1 text-lg font-bold text-black">
             <IoSearchOutline className="size-8" />
             <span>Landscape</span>
             <div></div>
           </div>
-          <div className="flex w-fit items-center justify-center gap-2 rounded-l-full bg-gradient-to-r from-green-200 to-green-300 px-6 py-1 text-lg font-bold text-black">
+          <div className="flex w-fit items-center justify-center gap-2 rounded-l-full bg-gradient-to-r from-[#a4cdf4] to-[#bbe9e4] px-6 py-1 text-lg font-bold text-black">
             <span>Recommend</span>
           </div>
         </div>
@@ -233,17 +229,17 @@ export default function Home() {
       </div>
       <div className="pt-10">
         <div className="flex w-full items-center justify-between gap-4">
-          <div className="flex w-fit items-center justify-center gap-2 rounded-r-full bg-gradient-to-r from-cyan-300 to-indigo-300 px-6 py-1 text-lg font-bold text-black">
+          <div className="flex w-fit items-center justify-center gap-2 rounded-r-full bg-gradient-to-r from-[#a4cdf4] to-[#96bbfe] px-6 py-1 text-lg font-bold text-black">
             <IoOptionsOutline className="size-8" />
             <span>Filter</span>
             <div></div>
           </div>
-          <div className="flex w-1/2 items-center justify-between gap-2 rounded-full bg-gradient-to-r from-green-200 to-blue-300 px-4 py-1 text-lg font-bold text-black">
+          <div className="flex w-1/2 items-center justify-between gap-2 rounded-full bg-gradient-to-r from-[#cafcda] to-[#99bffc] px-4 py-1 text-lg font-bold text-black">
             <IoSearchOutline className="size-8" />
             <span>Food</span>
             <div></div>
           </div>
-          <div className="flex w-fit items-center justify-center gap-2 rounded-l-full bg-gradient-to-r from-green-200 to-green-300 px-6 py-1 text-lg font-bold text-black">
+          <div className="flex w-fit items-center justify-center gap-2 rounded-l-full bg-gradient-to-r from-[#a4cdf4] to-[#bbe9e4] px-6 py-1 text-lg font-bold text-black">
             <span>Recommend</span>
           </div>
         </div>
