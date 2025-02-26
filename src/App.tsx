@@ -11,6 +11,7 @@ import Home from "./pages/home";
 import Login from "./pages/login";
 import Signup from "./pages/signup";
 import SignupVerify from "./pages/signup.verify";
+import Profile from "./pages/profile";
 
 function App() {
   const [queryClient] = useState(
@@ -48,6 +49,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/signup/verify" element={<SignupVerify />} />
+            <Route path="/profile/:id" element={<Profile />} />
           </Route>
         </Routes>
       </BrowserRouter>
