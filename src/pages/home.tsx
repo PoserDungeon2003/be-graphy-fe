@@ -101,7 +101,7 @@ export default function Home() {
                     alt="button"
                     className="h-full w-[89px]"
                   />
-                  <IoArrowForward className="absolute top-1/3 left-1/3 translate-x-1/2 size-5" />
+                  <IoArrowForward className="absolute top-1/3 left-1/3 size-5 translate-x-1/2" />
                 </button>
               </div>
               <div className="flex justify-around md:pt-12">
@@ -152,7 +152,7 @@ export default function Home() {
           className="absolute z-10"
         />
         <div className="flex flex-col items-center justify-center gap-10">
-          <div className="bg-gradient-to-r from-[#cafcda] to-[#99bffc] rounded-full px-6 py-4 w-1/2 mt-8">
+          <div className="mt-8 w-1/2 rounded-full bg-gradient-to-r from-[#cafcda] to-[#99bffc] px-6 py-4">
             <span className="flex items-center justify-center text-2xl font-bold text-black uppercase">
               About us
             </span>
