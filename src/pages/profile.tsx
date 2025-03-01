@@ -1,5 +1,5 @@
 import _ from "lodash"
-import { IoAddCircleOutline, IoLogoFacebook, IoLogoTwitter, IoSearch, IoSettingsOutline } from "react-icons/io5"
+import { IoAddCircleOutline, IoFolderOutline, IoLogoFacebook, IoLogoTwitter, IoReorderTwo, IoSearch, IoSettingsOutline, IoShareSocialOutline } from "react-icons/io5"
 import { Link } from "react-router"
 
 const tabs = [
@@ -23,7 +23,7 @@ const tabs = [
 
 export default function PhotographerProfile() {
   return (
-    <div className="flex items-center gap-4">
+    <div className="flex items-start gap-4 pb-20">
       <div className="flex flex-col items-center gap-6 w-1/3">
         <div
           style={{
@@ -46,8 +46,8 @@ export default function PhotographerProfile() {
           </div>
         ))}
       </div>
-      <div className="flex flex-col flex-1 w-2/3 px-4 h-full">
-        <div className="mb-20">
+      <div className="flex flex-col flex-1 w-2/3 px-4 gap-6 h-full pt-12">
+        <div className="mb-14">
           <span className="text-black font-bold text-2xl uppercase">
             Giới thiệu
           </span>
@@ -85,6 +85,31 @@ export default function PhotographerProfile() {
             <IoAddCircleOutline className="text-black size-10 cursor-pointer" />
             <IoSettingsOutline className="text-black size-10 cursor-pointer" />
           </div>
+        </div>
+        <div className="flex flex-col gap-8">
+          {_.map([0, 1, 2, 3], (item, index) => (
+            <div key={index} className="flex items-center bg-[#93DDD4] p-5">
+              <IoReorderTwo className="text-black rotate-90 size-10 cursor-pointer" />
+              <div className="flex flex-col items-center">
+                <img src="/images/landscape/landscape-1.png" alt="picture" className="w-1/2" />
+                <span className="text-black font-semibold">
+                  Photo style
+                </span>
+                <span className="text-black font-semibold">
+                  Name account
+                </span>
+              </div>
+              <div className="flex items-center gap-4 w-full">
+                <img src="/images/landscape/landscape-1.png" alt="picture" className="w-1/5" />
+                <img src="/images/landscape/landscape-1.png" alt="picture" className="w-1/5" />
+                <img src="/images/landscape/landscape-1.png" alt="picture" className="w-1/5" />
+              </div>
+              <div className="flex flex-col gap-4">
+                <IoFolderOutline className="text-black size-8 cursor-pointer" />
+                <IoShareSocialOutline className="text-black size-8 cursor-pointer" />
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </div>
