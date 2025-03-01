@@ -6,7 +6,7 @@ import { NavLink } from "react-router";
 const navBar = [
   {
     name: "Home",
-    to: "/",
+    to: "/user/home",
   },
   {
     name: "Booking",

@@ -116,7 +116,7 @@ const MessageList = () => {
   return (
     <div className="fixed inset-0 flex flex-col bg-gradient-to-r from-yellow-100 via-pink-100 to-purple-100">
       <div className="border-b bg-white px-6 py-4">
-        <Link to="/" className="inline-flex items-center font-semibold text-[#9681FA]">
+        <Link to="/user/home" className="inline-flex items-center font-semibold text-[#9681FA]">
           <IoChevronBackOutline className="h-5 w-5" />
           Back
         </Link>
