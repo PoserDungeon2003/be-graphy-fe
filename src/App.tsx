@@ -7,13 +7,15 @@ import { useState } from "react";
 import { BrowserRouter, Outlet, Route, Routes } from "react-router";
 import "./App.css";
 import { Layout } from "./layouts";
+import Dashboard from "./pages/admin";
 import Chatbox from "./pages/chatbox/chatbox";
 import MessageList from "./pages/chatbox/messenger";
 import Home from "./pages/home";
+import HomeNoLogin from "./pages/homeNoLogin";
 import Login from "./pages/login";
+import Profile from "./pages/profile";
 import Signup from "./pages/signup";
 import SignupVerify from "./pages/signup.verify";
-import Profile from "./pages/profile";
 
 function App() {
   const [queryClient] = useState(
@@ -47,14 +49,21 @@ function App() {
               </Layout>
             }
           >
-            <Route index element={<Home />} />
+            {/* guest */}
+            <Route index element={<HomeNoLogin />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
-            <Route path="/messenger" element={<MessageList />} />
-            <Route path="/chatbox" element={<Chatbox />} />
             <Route path="/signup/verify" element={<SignupVerify />} />
-            <Route path="/profile/:id" element={<Profile />} />
           </Route>
+
+          {/* user */}
+          <Route index path="/user/home" element={<Home />} />
+          <Route path="/messenger" element={<MessageList />} />
+          <Route path="/chatbox" element={<Chatbox />} />
+          <Route path="/profile/:id" element={<Profile />} />
+
+          {/* admin */}
+          <Route path="/admin/dashboard/*" element={<Dashboard />} />
         </Routes>
       </BrowserRouter>
     </QueryClientProvider>

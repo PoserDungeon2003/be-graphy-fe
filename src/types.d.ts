@@ -18,3 +18,11 @@ export type Messenges = {
   is_read: boolean;
   sent_at: Date;
 };
+
+
+interface PhotoPostHome {
+  imgUrl: string;
+  title: string;
+  author: string;
+  actionButtons?: boolean;
+}

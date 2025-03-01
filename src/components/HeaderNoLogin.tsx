@@ -1,6 +1,4 @@
 import _ from "lodash";
-import { BiSearchAlt, BiSolidBellRing } from "react-icons/bi";
-import { FaUserAlt } from "react-icons/fa";
 import { NavLink } from "react-router";
 
 const navBar = [
@@ -10,7 +8,7 @@ const navBar = [
   },
   {
     name: "Booking",
-    to: "#",
+    to: "/login",
   },
   {
     name: "Pictures",
@@ -22,11 +20,11 @@ const navBar = [
   },
   {
     name: "Chat box",
-    to: "/messenger",
+    to: "/login",
   },
 ];
 
-export const Header = () => {
+export const HeaderNoLogin = () => {
   return (
     <header className="flex flex-row justify-between bg-gradient-to-r from-[#cafbda] to-[#9bc1fb]">
       <div>
@@ -38,11 +36,11 @@ export const Header = () => {
           ))}
         </nav>
       </div>
-      <div className="flex flex-row cursor-pointer space-x-7 p-3 text-black text-2xl">
+      {/* <div className="flex flex-row cursor-pointer space-x-7 p-3 text-black text-2xl">
         <BiSolidBellRing />
         <BiSearchAlt />
         <FaUserAlt />
-      </div>
+      </div> */}
     </header>
   );
 };

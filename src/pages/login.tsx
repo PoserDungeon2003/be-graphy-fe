@@ -1,9 +1,10 @@
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from "react-hook-form";
 import { IoChevronBackOutline } from "react-icons/io5";
 import { Link } from "react-router";
-import { useForm } from "react-hook-form";
-import { LoginRQ } from "../types";
+import { useNavigate } from "react-router-dom";
 import { object, string } from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
+import { LoginRQ } from "../types";
 
 const schema = object({
   email: string().email().required().trim(),
@@ -11,6 +12,8 @@ const schema = object({
 });
 
 export default function Login() {
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -22,9 +25,15 @@ export default function Login() {
 
   const onSubmit = (data: LoginRQ) => {
     try {
-      console.log(data);
+      console.log("Submitted Data:", data);
+
+      if (data.email === "admin@example.com" && data.password === "123") {
+        navigate("/admin/dashboard/customers");
+      } else {
+        navigate("/user/home");
+      }
     } catch (error: any) {
-      console.log(error);
+      console.error(error);
     }
   };
 
