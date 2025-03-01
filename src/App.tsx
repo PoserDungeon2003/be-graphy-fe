@@ -13,7 +13,8 @@ import MessageList from "./pages/chatbox/messenger";
 import Home from "./pages/home";
 import HomeNoLogin from "./pages/homeNoLogin";
 import Login from "./pages/login";
-import Profile from "./pages/profile";
+import PhotographerProfile from "./pages/profile";
+import Profile from "./pages/profile.$id";
 import Signup from "./pages/signup";
 import SignupVerify from "./pages/signup.verify";
 
@@ -61,6 +62,7 @@ function App() {
           <Route path="/messenger" element={<MessageList />} />
           <Route path="/chatbox" element={<Chatbox />} />
           <Route path="/profile/:id" element={<Profile />} />
+          <Route path="/profile" element={<PhotographerProfile />} />
 
           {/* admin */}
           <Route path="/admin/dashboard/*" element={<Dashboard />} />
