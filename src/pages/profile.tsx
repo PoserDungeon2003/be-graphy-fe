@@ -1,5 +1,6 @@
 import _ from "lodash"
-import { IoLogoFacebook, IoLogoTwitter } from "react-icons/io5"
+import { IoAddCircleOutline, IoLogoFacebook, IoLogoTwitter, IoSearch, IoSettingsOutline } from "react-icons/io5"
+import { Link } from "react-router"
 
 const tabs = [
   {
@@ -44,12 +45,9 @@ export default function PhotographerProfile() {
             </span>
           </div>
         ))}
-        {/* <div className="flex flex-col gap-4 pt-20 pl-20">
-
-        </div> */}
       </div>
-      <div className="flex-1">
-        <div>
+      <div className="flex flex-col flex-1 w-2/3 px-4 h-full">
+        <div className="mb-20">
           <span className="text-black font-bold text-2xl uppercase">
             Giới thiệu
           </span>
@@ -69,13 +67,23 @@ export default function PhotographerProfile() {
               </div>
             </div>
             <div className="absolute right-0 bottom-0 translate-y-1/2 flex items-center gap-4">
-              <div className="bg-[#F5F5F5] text-[#2C2C2C] text-base font-medium px-8 py-4 rounded-md border border-[#2C2C2C] cursor-pointer">
+              <Link to={'#'} className="bg-[#F5F5F5] text-[#2C2C2C] text-base font-medium px-8 py-4 rounded-md border border-[#2C2C2C]">
                 <IoLogoFacebook className="size-8" />
-              </div>
-              <div className="bg-[#F5F5F5] text-[#2C2C2C] text-base font-medium px-8 py-4 rounded-md border border-[#2C2C2C] cursor-pointer">
+              </Link>
+              <Link to={'#'} className="bg-[#F5F5F5] text-[#2C2C2C] text-base font-medium px-8 py-4 rounded-md border border-[#2C2C2C]">
                 <IoLogoTwitter className="size-8" />
-              </div>
+              </Link>
             </div>
+          </div>
+        </div>
+        <div className="flex justify-between px-4">
+          <div className="relative w-full">
+            <IoSearch className="text-black absolute top-1/2 -translate-y-1/2 ml-3 size-5" />
+            <input type="text" name="search" id="search" className="bg-[#93DDD4] w-96 rounded-md pl-10 pr-4 py-4 text-black focus:outline-0" />
+          </div>
+          <div className="flex items-center gap-4">
+            <IoAddCircleOutline className="text-black size-10 cursor-pointer" />
+            <IoSettingsOutline className="text-black size-10 cursor-pointer" />
           </div>
         </div>
       </div>
