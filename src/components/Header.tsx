@@ -1,5 +1,5 @@
-import { NavLink } from "react-router";
 import _ from "lodash";
+import { NavLink } from "react-router";
 
 const navBar = [
   {
@@ -20,7 +20,7 @@ const navBar = [
   },
   {
     name: "Chat box",
-    to: "#",
+    to: "/messenger",
   },
 ];
 

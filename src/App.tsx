@@ -1,12 +1,14 @@
-import "./App.css";
-import { BrowserRouter, Outlet, Route, Routes } from "react-router";
-import { Layout } from "./layouts";
 import {
   QueryCache,
   QueryClient,
   QueryClientProvider,
 } from "@tanstack/react-query";
 import { useState } from "react";
+import { BrowserRouter, Outlet, Route, Routes } from "react-router";
+import "./App.css";
+import { Layout } from "./layouts";
+import Chatbox from "./pages/chatbox/chatbox";
+import MessageList from "./pages/chatbox/messenger";
 import Home from "./pages/home";
 import Login from "./pages/login";
 import Signup from "./pages/signup";
@@ -48,6 +50,8 @@ function App() {
             <Route index element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
+            <Route path="/messenger" element={<MessageList />} />
+            <Route path="/chatbox" element={<Chatbox />} />
             <Route path="/signup/verify" element={<SignupVerify />} />
             <Route path="/profile/:id" element={<Profile />} />
           </Route>
