@@ -255,11 +255,11 @@ export default function PhotographerProfile() {
           onDragEnd={handleDragEnd}
         >
           <SortableContext
-            items={albums.map((album) => album.id)}
+            items={_.map(albums, (album) => album.id)}
             strategy={verticalListSortingStrategy}
           >
             <div className="flex flex-col gap-4">
-              {albums.map((album) => (
+              {_.map(albums, (album) => (
                 <SortableAlbum key={album.id} album={album} />
               ))}
             </div>
