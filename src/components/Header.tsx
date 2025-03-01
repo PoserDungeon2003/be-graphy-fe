@@ -1,11 +1,11 @@
-import { NavLink, useNavigate } from "react-router";
 import _ from "lodash";
 import { IoNotifications, IoPerson, IoSearch } from "react-icons/io5";
+import { NavLink, useNavigate } from "react-router";
 
 const navBar = [
   {
     name: "Home",
-    to: "/",
+    to: "/user/home",
   },
   {
     name: "Booking",
@@ -21,7 +21,7 @@ const navBar = [
   },
   {
     name: "Chat box",
-    to: "#",
+    to: "/messenger",
   },
 ];
 
