@@ -9,7 +9,7 @@ import {
   IoSettingsOutline,
   IoShareSocialOutline,
 } from "react-icons/io5";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import {
   closestCenter,
   DndContext,
@@ -65,6 +65,8 @@ function SortableAlbum({ album }: { album: Album }) {
     transition,
   };
 
+  const navigate = useNavigate();
+
   return (
     <div
       ref={setNodeRef}
@@ -94,7 +96,7 @@ function SortableAlbum({ album }: { album: Album }) {
         ))}
       </div>
       <div className="ml-4 flex flex-col gap-4">
-        <IoFolderOutline className="size-8 cursor-pointer text-black hover:text-gray-700" />
+        <IoFolderOutline onClick={() => navigate(`/album/${album.id}`)} className="size-8 cursor-pointer text-black hover:text-gray-700" />
         <IoShareSocialOutline className="size-8 cursor-pointer text-black hover:text-gray-700" />
       </div>
     </div>
