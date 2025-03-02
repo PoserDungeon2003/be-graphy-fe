@@ -96,7 +96,10 @@ function SortableAlbum({ album }: { album: Album }) {
         ))}
       </div>
       <div className="ml-4 flex flex-col gap-4">
-        <IoFolderOutline onClick={() => navigate(`/album/${album.id}`)} className="size-8 cursor-pointer text-black hover:text-gray-700" />
+        <IoFolderOutline
+          onClick={() => navigate(`/album/${album.id}`)}
+          className="size-8 cursor-pointer text-black hover:text-gray-700"
+        />
         <IoShareSocialOutline className="size-8 cursor-pointer text-black hover:text-gray-700" />
       </div>
     </div>

@@ -1,5 +1,10 @@
 import _ from "lodash";
-import { IoAddCircleOutline, IoCloseOutline, IoSearch, IoSettingsOutline } from "react-icons/io5";
+import {
+  IoAddCircleOutline,
+  IoCloseOutline,
+  IoSearch,
+  IoSettingsOutline,
+} from "react-icons/io5";
 
 export default function Album() {
   return (
@@ -19,38 +24,38 @@ export default function Album() {
           <IoSettingsOutline className="size-10 cursor-pointer text-black" />
         </div>
       </div>
-      <div className="bg-[#93DDD4] rounded-xl p-6 flex items-center justify-center gap-10">
-        <div className="w-1/4 relative">
-          <IoSettingsOutline className="text-white absolute bottom-0 right-0 -translate-x-2/3 -translate-y-2/3 mr-4 mb-4 size-6 cursor-pointer" />
-          <img src="/images/landscape/landscape-1.png" alt="picture" className="w-full" />
+      <div className="flex items-center justify-center gap-10 rounded-xl bg-[#93DDD4] p-6">
+        <div className="relative w-1/4">
+          <IoSettingsOutline className="absolute right-0 bottom-0 mr-4 mb-4 size-6 -translate-x-2/3 -translate-y-2/3 cursor-pointer text-white" />
+          <img
+            src="/images/landscape/landscape-1.png"
+            alt="picture"
+            className="w-full"
+          />
         </div>
-        <div className="bg-white w-3/4 p-6 rounded-md flex flex-col gap-4">
+        <div className="flex w-3/4 flex-col gap-4 rounded-md bg-white p-6">
           <div className="flex items-center justify-between">
-            <span className="text-black uppercase text-2xl font-medium">
+            <span className="text-2xl font-medium text-black uppercase">
               Tên Album
             </span>
-            <span className="text-black uppercase text-2xl font-medium bg-[#93DDD4] px-20 py-4 rounded-md">
+            <span className="rounded-md bg-[#93DDD4] px-20 py-4 text-2xl font-medium text-black uppercase">
               Chủ đề
             </span>
           </div>
-          <span className="w-full text-black uppercase text-2xl font-medium bg-[#93DDD4] px-20 py-4 rounded-md">
+          <span className="w-full rounded-md bg-[#93DDD4] px-20 py-4 text-2xl font-medium text-black uppercase">
             ĐÂY LÀ DESCRIPTION
           </span>
         </div>
       </div>
       <div className="grid grid-cols-4 gap-10">
         {_.map([0, 1, 2, 3, 4, 5, 6, 7, 8, 9], (item, index) => (
-          <div key={index} className="space-y-2 relative">
-            <IoCloseOutline className="text-black absolute font-bold size-8 right-0 translate-x-2/3 -translate-y-1/2 cursor-pointer" />
+          <div key={index} className="relative space-y-2">
+            <IoCloseOutline className="absolute right-0 size-8 -translate-y-1/2 translate-x-2/3 cursor-pointer font-bold text-black" />
             <img src="/images/landscape/landscape-1.png" alt="picture" />
             <div>
-              <div className="text-black flex flex-col font-bold">
-                <span>
-                  Photo style
-                </span>
-                <span>
-                  Name account
-                </span>
+              <div className="flex flex-col font-bold text-black">
+                <span>Photo style</span>
+                <span>Name account</span>
               </div>
             </div>
           </div>
