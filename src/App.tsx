@@ -13,6 +13,7 @@ import Signup from "./pages/signup";
 import SignupVerify from "./pages/signup.verify";
 import Profile from "./pages/profile.$id";
 import PhotographerProfile from "./pages/profile";
+import Album from "./pages/album.$id";
 
 function App() {
   const [queryClient] = useState(
@@ -52,6 +53,7 @@ function App() {
             <Route path="/signup/verify" element={<SignupVerify />} />
             <Route path="/profile/:id" element={<Profile />} />
             <Route path="/profile" element={<PhotographerProfile />} />
+            <Route path="/album/:id" element={<Album />} />
           </Route>
         </Routes>
       </BrowserRouter>
