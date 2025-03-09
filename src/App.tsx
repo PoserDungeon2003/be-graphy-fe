@@ -8,6 +8,7 @@ import { BrowserRouter, Outlet, Route, Routes } from "react-router";
 import "./App.css";
 import { Layout } from "./layouts";
 import Dashboard from "./pages/admin";
+import Album from "./pages/album.$id";
 import Chatbox from "./pages/chatbox/chatbox";
 import MessageList from "./pages/chatbox/messenger";
 import Home from "./pages/home";
@@ -63,6 +64,7 @@ function App() {
           <Route path="/chatbox" element={<Chatbox />} />
           <Route path="/profile/:id" element={<Profile />} />
           <Route path="/profile" element={<PhotographerProfile />} />
+          <Route path="/album/:id" element={<Album />} />
 
           {/* admin */}
           <Route path="/admin/dashboard/*" element={<Dashboard />} />
