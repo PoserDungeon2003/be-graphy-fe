@@ -1,14 +1,16 @@
+// src/components/Register.tsx
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { IoChevronBackOutline } from "react-icons/io5";
 import { Link } from "react-router";
 import { object, string } from "yup";
+import { registerUser } from "../api/register";
 import { RegisterRQ } from "../types";
 
 const schema = object({
-  name: string().required(),
-  email: string().email().required(),
-  password: string().required(),
+  name: string().required("Tên là bắt buộc"),
+  email: string().email("Email không hợp lệ").required("Email là bắt buộc"),
+  password: string().required("Mật khẩu là bắt buộc"),
 });
 
 export default function Register() {
@@ -16,16 +18,31 @@ export default function Register() {
     register,
     handleSubmit,
     formState: { errors },
+    setError,
   } = useForm<RegisterRQ>({
     mode: "onChange",
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = (data: RegisterRQ) => {
-    try {
-      console.log(data);
-    } catch (error: any) {
-      console.log(error);
+  const onSubmit = async (data: RegisterRQ) => {
+    const result = await registerUser(data);
+    
+    if (result.success) {
+      console.log('Đăng ký thành công:', result.data);
+      // Có thể thêm redirect hoặc thông báo thành công
+      // Ví dụ: window.location.href = '/login';
+    } else {
+      console.log('Lỗi đăng ký:', result.message);
+      
+      // Xử lý lỗi từ API
+      if (result.errors) {
+        Object.entries(result.errors).forEach(([field, messages]) => {
+          setError(field.toLowerCase() as keyof RegisterRQ, {
+            type: 'manual',
+            message: Array.isArray(messages) ? messages[0] : messages,
+          });
+        });
+      }
     }
   };
 
@@ -54,7 +71,7 @@ export default function Register() {
             <img src="/images/background/bg_input.png" alt="input background" />
             <input
               {...register("name")}
-              type="name"
+              type="text"
               name="name"
               id="name"
               placeholder="NAME"
