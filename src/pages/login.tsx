@@ -1,9 +1,11 @@
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { IoChevronBackOutline } from "react-icons/io5";
 import { Link } from "react-router";
 import { useNavigate } from "react-router-dom";
 import { object, string } from "yup";
+import { loginUser } from "../api/login";
 import { LoginRQ } from "../types";
 
 const schema = object({
@@ -13,6 +15,8 @@ const schema = object({
 
 export default function Login() {
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
+  const [loginError, setLoginError] = useState<string | null>(null);
 
   const {
     register,
@@ -23,17 +27,29 @@ export default function Login() {
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = (data: LoginRQ) => {
+  const onSubmit = async (data: LoginRQ) => {
     try {
-      console.log("Submitted Data:", data);
+      setIsLoading(true);
+      setLoginError(null);
 
-      if (data.email === "admin@example.com" && data.password === "123") {
-        navigate("/admin/dashboard/customers");
+      const response = await loginUser(data);
+      if (response.success) {
+        if (response.data?.token) {
+          localStorage.setItem("authToken", response.data.token);
+        }
+        if (response.data?.user?.role === "admin") {
+          navigate("/admin/dashboard/customers");
+        } else {
+          navigate("/user/home");
+        }
       } else {
-        navigate("/user/home");
+        setLoginError(response.message || "Đăng nhập thất bại");
       }
     } catch (error: any) {
-      console.error(error);
+      console.error("Login error:", error);
+      setLoginError("Đã xảy ra lỗi. Vui lòng thử lại.");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -60,6 +76,12 @@ export default function Login() {
         onSubmit={handleSubmit(onSubmit)}
         className="mt-8 flex flex-col items-center justify-center gap-4"
       >
+        {loginError && (
+          <div className="w-1/3 rounded bg-red-100 p-3 text-center text-red-700 font-bold">
+            {loginError}
+          </div>
+        )}
+        
         <div className="w-1/3 space-y-1">
           <div className="relative">
             <img src="/images/background/bg_input.png" alt="input background" />
@@ -70,6 +92,7 @@ export default function Login() {
               id="email"
               placeholder="EMAIL"
               className="focus:shadow-outline absolute inset-0 rounded-full px-6 leading-tight font-extrabold text-black focus:outline-none"
+              disabled={isLoading}
             />
           </div>
           {errors.email && (
@@ -88,6 +111,7 @@ export default function Login() {
               id="password"
               placeholder="PASSWORD"
               className="focus:shadow-outline absolute inset-0 rounded-full px-6 leading-tight font-extrabold text-black focus:outline-none"
+              disabled={isLoading}
             />
           </div>
           {errors.password && (
@@ -98,9 +122,14 @@ export default function Login() {
         </div>
         <button
           type="submit"
-          className="mt-4 cursor-pointer rounded-full bg-indigo-400 px-12 py-3 font-bold text-white uppercase active:bg-indigo-500"
+          disabled={isLoading}
+          className={`mt-4 rounded-full px-12 py-3 font-bold text-white uppercase ${
+            isLoading
+              ? "bg-indigo-300 cursor-not-allowed"
+              : "bg-indigo-400 cursor-pointer active:bg-indigo-500"
+          }`}
         >
-          Log in
+          {isLoading ? "Đang xử lý..." : "Log in"}
         </button>
         <span className="font-bold text-black uppercase">
           Create account?{" "}

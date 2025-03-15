@@ -1,33 +1,30 @@
-// src/api/authApi.ts
-import axios, { AxiosResponse } from 'axios';
-import { SignupRQ } from '../types'; // Đảm bảo type này được định nghĩa
-
-const api = axios.create({
-  baseURL: 'https://photofinder-bsenb7g3cpb4bpe3.southeastasia-01.azurewebsites.net', // Cập nhật URL API thực tế
-  headers: {
-    'Content-Type': 'application/json',
-  },
-});
-
-interface ApiResponse<T> {
-  success: boolean;
-  data?: T;
-  message?: string;
-  errors?: any;
-}
+import { AxiosResponse } from 'axios';
+import api, { ApiResponse } from '.';
+import { SignupRQ } from '../types';
 
 export const registerUser = async (data: SignupRQ): Promise<ApiResponse<any>> => {
   try {
     const response: AxiosResponse = await api.post('/api/Auth/Register', data);
-    return {
-      success: true,
-      data: response.data,
-    };
+    if (response.status >= 200 && response.status < 300) {
+      return {
+        success: true,
+        data: response.data,
+      };
+    } else {
+      return {
+        success: false,
+        message: response.data?.message || 'Đăng ký thất bại',
+        errors: response.data?.errors,
+      };
+    }
   } catch (error: any) {
     return {
       success: false,
-      message: error.response?.data?.message || 'Đăng ký thất bại',
-      errors: error.response?.data?.errors,
+      message:
+        error.response?.data?.message ||
+        error.message ||
+        'Lỗi hệ thống, vui lòng thử lại',
+      errors: error.response?.data?.errors || null,
     };
   }
 };

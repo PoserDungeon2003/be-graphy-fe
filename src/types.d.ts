@@ -3,12 +3,14 @@ export type LoginRQ = {
   password: string;
 };
 
-export type SignupRQ = {
-  name: string;
+export interface SignupRQ {
+  username: string;
   email: string;
+  phone: string;
   password: string;
-  confirmPassword: string;
-};
+  role?: "customer" | "photographer";
+  profilePic: string;
+}
 
 export type Messenges = {
   messenger_id: number;
