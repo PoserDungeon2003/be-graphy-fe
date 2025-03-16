@@ -1,15 +1,3 @@
-import _ from "lodash";
-import {
-  IoAddCircleOutline,
-  IoFolderOutline,
-  IoLogoFacebook,
-  IoLogoTwitter,
-  IoReorderTwo,
-  IoSearch,
-  IoSettingsOutline,
-  IoShareSocialOutline,
-} from "react-icons/io5";
-import { Link, useNavigate } from "react-router";
 import {
   closestCenter,
   DndContext,
@@ -19,7 +7,6 @@ import {
   useSensor,
   useSensors,
 } from "@dnd-kit/core";
-import { CSS } from "@dnd-kit/utilities";
 import {
   arrayMove,
   SortableContext,
@@ -27,7 +14,21 @@ import {
   useSortable,
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
+import _ from "lodash";
 import { useState } from "react";
+import {
+  IoAddCircleOutline,
+  IoChevronBackOutline,
+  IoFolderOutline,
+  IoLogoFacebook,
+  IoLogoTwitter,
+  IoReorderTwo,
+  IoSearch,
+  IoSettingsOutline,
+  IoShareSocialOutline,
+} from "react-icons/io5";
+import { Link, useNavigate } from "react-router";
 
 const tabs = [
   {
@@ -177,20 +178,26 @@ export default function PhotographerProfile() {
   return (
     <div className="flex items-start gap-4 pb-20">
       <div className="flex w-1/3 flex-col items-center gap-6">
+        <div className="fixed top-0 left-0 z-50 w-full border-b bg-white px-6 py-4">
+          <Link
+            to="/user/home"
+            className="inline-flex items-center font-semibold text-[#9681FA]"
+          >
+            <IoChevronBackOutline className="h-5 w-5" />
+            Back
+          </Link>
+        </div>
         <div
           style={{
             backgroundImage: "url('/images/landscape/landscape-1.png')",
           }}
-          className="relative mb-16 flex aspect-[501/369] w-auto flex-col items-center justify-end bg-cover bg-center"
+          className="relative mt-16 mb-16 flex aspect-[501/369] w-auto flex-col items-center justify-end bg-cover bg-center"
         >
           <img
             src="/images/sample/avatar.png"
             alt="avatar"
             className="w-1/3 rounded-full border-8"
           />
-          <div className="absolute bottom-0 z-10 flex w-1/2 translate-y-1/2 items-center justify-center rounded-4xl bg-white py-6">
-            <span className="text-base font-medium text-black">Name</span>
-          </div>
         </div>
         {_.map(tabs, (tab, index) => (
           <div
@@ -204,35 +211,24 @@ export default function PhotographerProfile() {
         ))}
       </div>
       <div className="flex h-full w-2/3 flex-1 flex-col gap-6 px-4 pt-12">
-        <div className="mb-14">
+        <div className="mb-14 mt-3">
           <span className="text-2xl font-bold text-black uppercase">
             Giới thiệu
           </span>
-          <div className="relative bg-[#93DDD4] py-20 text-center">
-            <span className="text-black">Xin chào tôi là ...!</span>
-            <div className="absolute bottom-0 flex translate-y-1/2 items-center gap-4">
-              <div className="rounded-md border border-[#2C2C2C] bg-[#F5F5F5] px-8 py-4 text-base font-medium text-[#2C2C2C]">
-                Nam
-              </div>
-              <div className="rounded-md border border-[#2C2C2C] bg-[#F5F5F5] px-8 py-4 text-base font-medium text-[#2C2C2C]">
-                1968
-              </div>
-              <div className="rounded-md border border-[#2C2C2C] bg-[#F5F5F5] px-8 py-4 text-base font-medium text-[#2C2C2C]">
-                Hồ Chí Minh
-              </div>
-            </div>
+          <div className="relative bg-[#93DDD4] py-5 text-center">
+            <span className="text-black">Welcome!</span>
             <div className="absolute right-0 bottom-0 flex translate-y-1/2 items-center gap-4">
               <Link
                 to={"#"}
                 target="_blank"
-                className="rounded-md border border-[#2C2C2C] bg-[#F5F5F5] px-8 py-4 text-base font-medium text-[#2C2C2C]"
+                className="rounded-md border border-[#2C2C2C] bg-[#F5F5F5] p-2 text-base font-medium text-[#2C2C2C]"
               >
                 <IoLogoFacebook className="size-8" />
               </Link>
               <Link
                 to={"#"}
                 target="_blank"
-                className="rounded-md border border-[#2C2C2C] bg-[#F5F5F5] px-8 py-4 text-base font-medium text-[#2C2C2C]"
+                className="rounded-md border border-[#2C2C2C] bg-[#F5F5F5] p-2 text-base font-medium text-[#2C2C2C]"
               >
                 <IoLogoTwitter className="size-8" />
               </Link>

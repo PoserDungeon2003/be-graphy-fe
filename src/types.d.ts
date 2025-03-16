@@ -28,3 +28,13 @@ interface PhotoPostHome {
   author: string;
   actionButtons?: boolean;
 }
+
+export interface PackageModel {
+  id: number;
+  photographerId: number;
+  packageName: string;
+  description: string;
+  price: number;
+  duration: number;
+  createdAt: string;
+}
