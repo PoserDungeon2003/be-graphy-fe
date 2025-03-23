@@ -23,7 +23,7 @@ const resolver = yupResolver(schema);
 export default function BookingId() {
   const { id } = useParams();
   const { token } = useGetUser();
-  const getPackageById = useGetPackageById(token || "", id);
+  const getPackageById = useGetPackageById(token || "", id || "");
   const { register, handleSubmit, setValue, formState: { errors } } = useForm<BookingType>({
     resolver,
     mode: 'onChange',
@@ -33,7 +33,7 @@ export default function BookingId() {
     console.log(data);
     try {
       let response = await createPayment(token || "", {
-        bookingId: id,
+        bookingId: id || "",
       })
 
       if (response) {

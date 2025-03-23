@@ -40,7 +40,7 @@ export interface PackageModel {
 }
 
 export type CreatePaymentRQ = {
-  bookingId: number;
+  bookingId: string;
 }
 
 export type CreatePaymentRS = {
