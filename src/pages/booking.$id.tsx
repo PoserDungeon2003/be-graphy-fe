@@ -54,7 +54,7 @@ export default function BookingId() {
     <div className="relative w-full h-full flex flex-col items-center justify-center">
       <div className="absolute top-0 left-0 z-50 w-full border-b bg-white px-6 py-4">
         <Link
-          to="/user/home"
+          to="/user/package"
           className="inline-flex items-center font-semibold text-[#9681FA]"
         >
           <IoChevronBackOutline className="h-5 w-5" />
