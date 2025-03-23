@@ -1,6 +1,7 @@
 import { AxiosResponse } from 'axios';
 import api, { ApiResponse } from '.';
 import { PackageModel } from '../types';
+import { useQuery } from '@tanstack/react-query';
 
 export const getAllPackages = async (): Promise<ApiResponse<PackageModel[]>> => {
   try {
@@ -28,6 +29,13 @@ export const getAllPackages = async (): Promise<ApiResponse<PackageModel[]>> => 
     };
   }
 };
+
+export const useGetAllPackages = () => {
+  return useQuery({
+    queryKey: ['packages'],
+    queryFn: async () => await getAllPackages(),
+  })
+}
 
 export const createPackage = async (data: PackageModel): Promise<ApiResponse<any>> => {
   try {
