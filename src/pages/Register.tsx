@@ -1,55 +1,48 @@
+// src/components/Register.tsx
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { IoChevronBackOutline } from "react-icons/io5";
 import { Link } from "react-router";
-import { useNavigate } from "react-router-dom";
 import { object, string } from "yup";
-import { loginUser } from "../api/login";
-import { LoginRQ } from "../types";
+import { registerUser } from "../api/register";
+import { RegisterRQ } from "../types";
 
 const schema = object({
-  email: string().email().required().trim(),
-  password: string().required().trim(),
+  name: string().required("Tên là bắt buộc"),
+  email: string().email("Email không hợp lệ").required("Email là bắt buộc"),
+  password: string().required("Mật khẩu là bắt buộc"),
 });
 
-export default function Login() {
-  const navigate = useNavigate();
-  const [isLoading, setIsLoading] = useState(false);
-  const [loginError, setLoginError] = useState<string | null>(null);
-
+export default function Register() {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<LoginRQ>({
+    setError,
+  } = useForm<RegisterRQ>({
     mode: "onChange",
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = async (data: LoginRQ) => {
-    try {
-      setIsLoading(true);
-      setLoginError(null);
-
-      const response = await loginUser(data);
-      if (response.success) {
-        if (response.data?.token) {
-          localStorage.setItem("authToken", response.data.token);
-        }
-        if (response.data?.user?.role === "admin") {
-          navigate("/admin/dashboard/customers");
-        } else {
-          navigate("/user/home");
-        }
-      } else {
-        setLoginError(response.message || "Đăng nhập thất bại");
+  const onSubmit = async (data: RegisterRQ) => {
+    const result = await registerUser(data);
+    
+    if (result.success) {
+      console.log('Đăng ký thành công:', result.data);
+      // Có thể thêm redirect hoặc thông báo thành công
+      // Ví dụ: window.location.href = '/login';
+    } else {
+      console.log('Lỗi đăng ký:', result.message);
+      
+      // Xử lý lỗi từ API
+      if (result.errors) {
+        Object.entries(result.errors).forEach(([field, messages]) => {
+          setError(field.toLowerCase() as keyof RegisterRQ, {
+            type: 'manual',
+            message: Array.isArray(messages) ? messages[0] : messages,
+          });
+        });
       }
-    } catch (error: any) {
-      console.error("Login error:", error);
-      setLoginError("Đã xảy ra lỗi. Vui lòng thử lại.");
-    } finally {
-      setIsLoading(false);
     }
   };
 
@@ -69,19 +62,29 @@ export default function Login() {
         alt="effect"
         className="absolute top-0 right-0 -z-10 w-1/2"
       />
-      <h1 className="text-center text-4xl font-bold text-black uppercase">
-        Be Graphy
-      </h1>
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="mt-8 flex flex-col items-center justify-center gap-4"
       >
-        {loginError && (
-          <div className="w-1/3 rounded bg-red-100 p-3 text-center text-red-700 font-bold">
-            {loginError}
+        <div className="w-1/3 space-y-1">
+          <div className="relative">
+            <img src="/images/background/bg_input.png" alt="input background" />
+            <input
+              {...register("name")}
+              type="text"
+              name="name"
+              id="name"
+              placeholder="NAME"
+              className="focus:shadow-outline absolute inset-0 rounded-full px-6 leading-tight font-extrabold text-black focus:outline-none"
+            />
           </div>
-        )}
-        
+          {errors.name && (
+            <span className="px-4 text-sm font-bold text-red-500">
+              {errors.name?.message}
+            </span>
+          )}
+        </div>
+
         <div className="w-1/3 space-y-1">
           <div className="relative">
             <img src="/images/background/bg_input.png" alt="input background" />
@@ -92,7 +95,6 @@ export default function Login() {
               id="email"
               placeholder="EMAIL"
               className="focus:shadow-outline absolute inset-0 rounded-full px-6 leading-tight font-extrabold text-black focus:outline-none"
-              disabled={isLoading}
             />
           </div>
           {errors.email && (
@@ -101,6 +103,7 @@ export default function Login() {
             </span>
           )}
         </div>
+
         <div className="w-1/3 space-y-1">
           <div className="relative">
             <img src="/images/background/bg_input.png" alt="input background" />
@@ -111,7 +114,6 @@ export default function Login() {
               id="password"
               placeholder="PASSWORD"
               className="focus:shadow-outline absolute inset-0 rounded-full px-6 leading-tight font-extrabold text-black focus:outline-none"
-              disabled={isLoading}
             />
           </div>
           {errors.password && (
@@ -120,21 +122,17 @@ export default function Login() {
             </span>
           )}
         </div>
+
         <button
           type="submit"
-          disabled={isLoading}
-          className={`mt-4 rounded-full px-12 py-3 font-bold text-white uppercase ${
-            isLoading
-              ? "bg-indigo-300 cursor-not-allowed"
-              : "bg-indigo-400 cursor-pointer active:bg-indigo-500"
-          }`}
+          className="cursor-pointer rounded-full bg-white px-12 py-3 text-2xl font-bold text-[#6AD3F3] uppercase underline active:bg-indigo-500"
         >
-          {isLoading ? "Đang xử lý..." : "Log in"}
+          Be now
         </button>
         <span className="font-bold text-black uppercase">
-          Create account?{" "}
-          <Link to="/signup" className="font-bold text-[#6AD3F3] underline">
-            Sign up
+          ALREADY HAVE AN ACCOUNT?{" "}
+          <Link to="/login" className="font-bold text-[#6AD3F3] underline">
+            Sign in
           </Link>
         </span>
       </form>

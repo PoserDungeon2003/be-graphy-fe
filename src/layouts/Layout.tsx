@@ -1,4 +1,4 @@
-import { Footer, Header } from "../components";
+import { Footer, HeaderNoLogin } from "../components";
 
 type LayoutProps = {
   children: React.ReactElement | React.ReactNode;
@@ -7,7 +7,7 @@ type LayoutProps = {
 export const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <>
-      <Header />
+      <HeaderNoLogin />
       <main className="grow">{children}</main>
       <Footer />
     </>

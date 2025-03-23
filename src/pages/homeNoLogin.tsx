@@ -6,7 +6,7 @@ import {
   IoSearchOutline
 } from "react-icons/io5";
 import { Link, useNavigate } from "react-router";
-import { Footer, Header, PhotoPost } from "../components";
+import { PhotoPost } from "../components";
 
 const landscape = [
   {
@@ -59,12 +59,11 @@ const food = [
   },
 ];
 
-export default function Home() {
+export default function HomeNoLogin() {
   const navigate = useNavigate();
 
   return (
     <div className="flex h-full w-full flex-col pb-10">
-      <Header />
       <div className="relative flex h-full w-full flex-col justify-between">
         <div className="flex w-1/2 flex-col">
           <img
@@ -102,7 +101,7 @@ export default function Home() {
                   <IoArrowForward className="absolute top-1/3 left-1/3 size-5 translate-x-1/2" />
                 </button>
               </div>
-              {/* <div className="flex justify-around md:pt-12">
+              <div className="flex justify-around md:pt-12">
                 <img
                   src="/images/button/btn_signup.png"
                   alt="signup"
@@ -115,7 +114,7 @@ export default function Home() {
                   className="h-full w-1/4 cursor-pointer"
                   onClick={() => navigate("/login")}
                 />
-              </div> */}
+              </div>
             </div>
           </div>
         </div>
@@ -247,7 +246,6 @@ export default function Home() {
           ))}
         </div>
       </div>
-      <Footer/>
     </div>
   );
 }
