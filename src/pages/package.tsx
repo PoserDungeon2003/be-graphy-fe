@@ -6,12 +6,13 @@ import {
     IoSearch,
     IoThumbsUp,
 } from "react-icons/io5";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { getAllPackages, useGetAllPackages } from "../api/package";
 import { PackageModel } from "../types";
 
 const PhotographyPackages = () => {
   const packages = useGetAllPackages();
+  const navigate = useNavigate();
   // const [packages, setPackages] = useState<PackageModel[]>([]);
   // const [loading, setLoading] = useState<boolean>(true);
   // const [error, setError] = useState<string | null>(null);
@@ -37,7 +38,7 @@ const PhotographyPackages = () => {
 
   const formatPackageForDisplay = (pkg: PackageModel) => {
     return {
-      id: pkg.id,
+      id: pkg.packageId,
       image: "https://cdn.5280.com/2024/10/WEB_analogheroimage-960x720.jpg",
       price: `${pkg.price.toLocaleString()} VND`,
       name: pkg.packageName,
@@ -109,6 +110,7 @@ const PhotographyPackages = () => {
               <div
                 key={displayPkg.id}
                 className="relative overflow-hidden rounded-lg bg-white shadow-md"
+                onClick={() => navigate(`/booking/${displayPkg.id}`)}
               >
                 <img
                   src="https://cdn.5280.com/2024/10/WEB_analogheroimage-960x720.jpg"

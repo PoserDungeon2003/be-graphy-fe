@@ -30,11 +30,19 @@ interface PhotoPostHome {
 }
 
 export interface PackageModel {
-  id: number;
+  packageId: number;
   photographerId: number;
   packageName: string;
   description: string;
   price: number;
   duration: number;
   createdAt: string;
+}
+
+export type CreatePaymentRQ = {
+  bookingId: number;
+}
+
+export type CreatePaymentRS = {
+  url: string;
 }

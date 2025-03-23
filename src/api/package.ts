@@ -2,6 +2,7 @@ import { AxiosResponse } from 'axios';
 import api, { ApiResponse } from '.';
 import { PackageModel } from '../types';
 import { useQuery } from '@tanstack/react-query';
+import request, { BASE_URL } from '../data/request';
 
 export const getAllPackages = async (): Promise<ApiResponse<PackageModel[]>> => {
   try {
@@ -62,4 +63,19 @@ export const createPackage = async (data: PackageModel): Promise<ApiResponse<any
       errors: error.response?.data?.errors || null,
     };
   }
+}
+
+export const getPackageById = async (token: string, id: string): Promise<PackageModel> => {
+  return await request.get(`${BASE_URL}/api/Package/Get_Package_By_Id?id=${id}`, {
+    headers: {
+      'Authorization': 'Bearer ' + token
+    }
+  })
+}
+
+export const useGetPackageById = (token: string, id: string) => {
+  return useQuery({
+    queryKey: ['package', id],
+    queryFn: () => getPackageById(token, id),
+  })
 }

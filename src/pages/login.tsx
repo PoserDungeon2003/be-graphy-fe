@@ -34,8 +34,8 @@ export default function Login() {
 
       const response = await loginUser(data);
       if (response.success) {
-        if (response.data?.token) {
-          localStorage.setItem("authToken", response.data.token);
+        if (response.data?.accessToken) {
+          localStorage.setItem("authToken", response.data.accessToken);
         }
         if (response.data?.user?.role === "admin") {
           navigate("/admin/dashboard/customers");
