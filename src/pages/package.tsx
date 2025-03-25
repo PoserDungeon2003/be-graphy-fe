@@ -6,37 +6,39 @@ import {
     IoSearch,
     IoThumbsUp,
 } from "react-icons/io5";
-import { Link } from "react-router-dom";
-import { getAllPackages } from "../api/package";
+import { Link, useNavigate } from "react-router-dom";
+import { getAllPackages, useGetAllPackages } from "../api/package";
 import { PackageModel } from "../types";
 
 const PhotographyPackages = () => {
-  const [packages, setPackages] = useState<PackageModel[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
+  const packages = useGetAllPackages();
+  const navigate = useNavigate();
+  // const [packages, setPackages] = useState<PackageModel[]>([]);
+  // const [loading, setLoading] = useState<boolean>(true);
+  // const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    const fetchPackages = async () => {
-      try {
-        const response = await getAllPackages();
-        if (response.success) {
-          setPackages(response.data);
-        } else {
-          setError(response.message || "Không thể tải dữ liệu gói chụp ảnh");
-        }
-      } catch (err) {
-        setError("Đã xảy ra lỗi khi tải dữ liệu");
-      } finally {
-        setLoading(false);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchPackages = async () => {
+  //     try {
+  //       const response = await getAllPackages();
+  //       if (response.success) {
+  //         setPackages(response.data);
+  //       } else {
+  //         setError(response.message || "Không thể tải dữ liệu gói chụp ảnh");
+  //       }
+  //     } catch (err) {
+  //       setError("Đã xảy ra lỗi khi tải dữ liệu");
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
 
-    fetchPackages();
-  }, []);
+  //   fetchPackages();
+  // }, []);
 
   const formatPackageForDisplay = (pkg: PackageModel) => {
     return {
-      id: pkg.id,
+      id: pkg.packageId,
       image: "https://cdn.5280.com/2024/10/WEB_analogheroimage-960x720.jpg",
       price: `${pkg.price.toLocaleString()} VND`,
       name: pkg.packageName,
@@ -79,35 +81,36 @@ const PhotographyPackages = () => {
       </div>
 
       {/* Loading state */}
-      {loading && (
+      {packages.isLoading && (
         <div className="flex flex-grow items-center justify-center">
           <div className="text-xl text-gray-600">Đang tải dữ liệu...</div>
         </div>
       )}
 
       {/* Error state */}
-      {!loading && error && (
+      {!packages.isLoading && packages.error && (
         <div className="flex flex-grow items-center justify-center">
-          <div className="text-xl text-red-600">{error}</div>
+          <div className="text-xl text-red-600">{packages.error.message}</div>
         </div>
       )}
 
       {/* Empty state */}
-      {!loading && !error && packages.length === 0 && (
+      {!packages.isLoading && !packages.error && packages.data?.data?.length === 0 && (
         <div className="flex flex-grow items-center justify-center">
           <div className="text-xl text-gray-600">Đang cập nhật dữ liệu...</div>
         </div>
       )}
 
       {/* Grid of photography packages */}
-      {!loading && !error && packages.length > 0 && (
+      {!packages.isLoading && !packages.error && packages.data?.data?.length! > 0 && (
         <div className="grid grid-cols-3 gap-4 overflow-y-auto p-4">
-          {packages.map((pkg) => {
+          {packages.data?.data?.map((pkg) => {
             const displayPkg = formatPackageForDisplay(pkg);
             return (
               <div
                 key={displayPkg.id}
                 className="relative overflow-hidden rounded-lg bg-white shadow-md"
+                onClick={() => navigate(`/booking/${displayPkg.id}`)}
               >
                 <img
                   src="https://cdn.5280.com/2024/10/WEB_analogheroimage-960x720.jpg"
