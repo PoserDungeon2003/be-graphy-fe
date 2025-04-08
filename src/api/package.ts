@@ -55,3 +55,30 @@ export const createPackage = async (data: PackageModel): Promise<ApiResponse<any
     };
   }
 }
+
+export const getPackages = async (photographerId: number): Promise<ApiResponse<PackageModel[]>> => {
+  try {
+    const response = await api.get(`/api/Package/Get_Packages_By_PhotographerId?id=${photographerId}`);
+    if (response.status >= 200 && response.status < 300) {
+      return {
+        success: true,
+        data: response.data,
+      };
+    } else {
+      return {
+        success: false,
+        message: response.data?.message || 'Không thể lấy danh sách gói chụp ảnh',
+        errors: response.data?.errors,
+      };
+    }
+  } catch (error: any) {
+    return {
+      success: false,
+      message:
+        error.response?.data?.message ||
+        error.message ||
+        'Lỗi hệ thống, vui lòng thử lại sau',
+      errors: error.response?.data?.errors || null,
+    };
+  }
+};

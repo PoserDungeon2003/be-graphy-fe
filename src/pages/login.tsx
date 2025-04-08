@@ -1,4 +1,5 @@
 import { yupResolver } from "@hookform/resolvers/yup";
+import { jwtDecode } from "jwt-decode";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { IoChevronBackOutline } from "react-icons/io5";
@@ -34,13 +35,29 @@ export default function Login() {
 
       const response = await loginUser(data);
       if (response.success) {
-        if (response.data?.token) {
-          localStorage.setItem("authToken", response.data.token);
-        }
-        if (response.data?.user?.role === "admin") {
-          navigate("/admin/dashboard/customers");
+        const { accessToken } = response.data || {};
+        
+        if (accessToken) {
+          localStorage.setItem("authToken", accessToken);
+          
+          // Decode JWT token to get user role
+          try {
+            const decoded: any = jwtDecode(accessToken);
+            const userRole = decoded.Role?.toLowerCase();
+            
+            if (userRole === "photographer") {
+              navigate("/photographer/home");
+            } else if (userRole === "customer" || userRole === "user") {
+              navigate("/user/home");
+            } else {
+              setLoginError("Không thể xác định vai trò người dùng");
+            }
+          } catch (decodeError) {
+            console.error("Token decode error:", decodeError);
+            setLoginError("Lỗi xác thực token, vui lòng đăng nhập lại");
+          }
         } else {
-          navigate("/user/home");
+          setLoginError("Không nhận được token xác thực");
         }
       } else {
         setLoginError(response.message || "Đăng nhập thất bại");

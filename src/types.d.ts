@@ -21,7 +21,6 @@ export type Messenges = {
   sent_at: Date;
 };
 
-
 interface PhotoPostHome {
   imgUrl: string;
   title: string;
@@ -29,6 +28,12 @@ interface PhotoPostHome {
   actionButtons?: boolean;
 }
 
+export interface ApiResponse<T> {
+  success: boolean;
+  data?: T;
+  message?: string;
+  errors?: any;
+}
 export interface PackageModel {
   id: number;
   photographerId: number;
@@ -37,4 +42,15 @@ export interface PackageModel {
   price: number;
   duration: number;
   createdAt: string;
+}
+export interface Album {
+  id: string;
+  style: string;
+  author: string;
+  mainImage: string;
+  images: string[];
+}
+export interface Tab {
+  name: string;
+  key: string;
 }

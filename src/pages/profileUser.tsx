@@ -107,7 +107,8 @@ function SortableAlbum({ album }: { album: Album }) {
   );
 }
 
-export default function PhotographerProfile() {
+export default function UserProfile() {
+  const navigate = useNavigate();
   const [albums, setAlbums] = useState<Album[]>([
     {
       id: "1",
@@ -179,13 +180,13 @@ export default function PhotographerProfile() {
     <div className="flex items-start gap-4 pb-20">
       <div className="flex w-1/3 flex-col items-center gap-6">
         <div className="fixed top-0 left-0 z-50 w-full border-b bg-white px-6 py-4">
-          <Link
-            to="/user/home"
+        <button
+            onClick={() => navigate(-1)}
             className="inline-flex items-center font-semibold text-[#9681FA]"
           >
             <IoChevronBackOutline className="h-5 w-5" />
             Back
-          </Link>
+          </button>
         </div>
         <div
           style={{
@@ -216,7 +217,7 @@ export default function PhotographerProfile() {
             Giới thiệu
           </span>
           <div className="relative bg-[#93DDD4] py-5 text-center">
-            <span className="text-black">Welcome!</span>
+            <span className="text-black">Welcome User!</span>
             <div className="absolute right-0 bottom-0 flex translate-y-1/2 items-center gap-4">
               <Link
                 to={"#"}

@@ -1,11 +1,21 @@
 import { Dropdown, Menu } from "antd";
+import { jwtDecode } from "jwt-decode";
 import _ from "lodash";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaSignOutAlt, FaUser } from "react-icons/fa";
 import { IoNotifications, IoPerson, IoSearch } from "react-icons/io5";
 import { NavLink, useNavigate } from "react-router";
 
-const navBar = [
+interface CustomJwtPayload {
+  UserId: string;
+  Email: string;
+  Role: string;
+  exp: number;
+  iss: string;
+  aud: string;
+}
+
+const userNavItems = [
   {
     name: "Home",
     to: "/user/home",
@@ -28,16 +38,75 @@ const navBar = [
   },
 ];
 
+const photographerNavItems = [
+  {
+    name: "Home",
+    to: "/photographer/home",
+  },
+  {
+    name: "Packages",
+    to: "/photographer/package",
+  },
+  {
+    name: "Gallery",
+    to: "/photographer/gallery",
+  },
+  {
+    name: "Contact us",
+    to: "#",
+  },
+  {
+    name: "Chat box",
+    to: "/photographer/messenger",
+  },
+];
+
 export const Header = () => {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
+  const [userRole, setUserRole] = useState("user"); // Default role
+  const [navBar, setNavBar] = useState(userNavItems);
+
+  useEffect(() => {
+    // Get token and determine user role on component mount
+    const token = localStorage.getItem("authToken");
+    if (token) {
+      try {
+        const decoded = jwtDecode<CustomJwtPayload>(token);
+        const role = decoded.Role?.toLowerCase() || "user";
+        setUserRole(role);
+        
+        // Set navigation items based on role
+        if (role === "photographer") {
+          setNavBar(photographerNavItems);
+        } else if (role === "customer" || role === "user") {
+          setNavBar(userNavItems);
+        } else {
+          // Default to user navigation items for any other role
+          console.warn(`Unknown role detected: ${role}, defaulting to user navigation`);
+          setNavBar(userNavItems);
+        }
+      } catch (error) {
+        console.error("Error decoding token:", error);
+        // Default to user navigation if token can't be decoded
+        setNavBar(userNavItems);
+      }
+    }
+  }, []);
 
   const handleLogout = () => {
+    // Clear auth token from localStorage
+    localStorage.removeItem("authToken");
     navigate("/login");
   };
 
   const handleProfile = () => {
-    navigate("/user/profile");
+    // Navigate to role-specific profile page
+    if (userRole === "photographer") {
+      navigate("/photographer/profile");
+    } else {
+      navigate("/user/profile");
+    }
   };
 
   const menu = (

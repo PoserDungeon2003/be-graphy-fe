@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import {
-    IoChevronBackOutline,
-    IoEye,
-    IoFilter,
-    IoSearch,
-    IoThumbsUp,
+  IoChevronBackOutline,
+  IoEye,
+  IoFilter,
+  IoSearch,
+  IoThumbsUp,
 } from "react-icons/io5";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { getAllPackages } from "../api/package";
 import { PackageModel } from "../types";
 
@@ -14,6 +14,7 @@ const PhotographyPackages = () => {
   const [packages, setPackages] = useState<PackageModel[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchPackages = async () => {
@@ -53,13 +54,13 @@ const PhotographyPackages = () => {
   return (
     <div className="fixed inset-0 flex flex-col bg-gradient-to-r from-yellow-100 via-pink-100 to-purple-100">
       <div className="border-b bg-white px-6 py-4">
-        <Link
-          to="/user/home"
-          className="inline-flex items-center font-semibold text-[#9681FA]"
-        >
-          <IoChevronBackOutline className="h-5 w-5" />
-          Back
-        </Link>
+      <button
+            onClick={() => navigate(-1)}
+            className="inline-flex items-center font-semibold text-[#9681FA]"
+          >
+            <IoChevronBackOutline className="h-5 w-5" />
+            Back
+          </button>
       </div>
       {/* Action buttons */}
       <div className="flex justify-between px-4 py-2">

@@ -7,7 +7,6 @@ import { useState } from "react";
 import { BrowserRouter, Outlet, Route, Routes } from "react-router";
 import "./App.css";
 import { Layout } from "./layouts";
-import Dashboard from "./pages/admin";
 import Album from "./pages/album.$id";
 import Chatbox from "./pages/chatbox/chatbox";
 import MessageList from "./pages/chatbox/messenger";
@@ -15,8 +14,9 @@ import Home from "./pages/home";
 import HomeNoLogin from "./pages/homeNoLogin";
 import Login from "./pages/login";
 import PhotographyPackages from "./pages/package";
-import PhotographerProfile from "./pages/profile";
 import Profile from "./pages/profile.$id";
+import PhotographerProfile from "./pages/profilePhotographer/profilePhotographer";
+import UserProfile from "./pages/profileUser";
 import Signup from "./pages/signup";
 import SignupVerify from "./pages/signup.verify";
 
@@ -64,14 +64,24 @@ function App() {
           <Route path="/messenger" element={<MessageList />} />
           <Route path="/chatbox" element={<Chatbox />} />
           <Route path="/profile/:id" element={<Profile />} />
-          <Route path="/user/profile" element={<PhotographerProfile />} />
+          <Route path="/user/profile" element={<UserProfile />} />
           <Route path="/album/:id" element={<Album />} />
           <Route path="/user/package" element={<PhotographyPackages />} />
 
-          
-
-          {/* admin */}
-          <Route path="/admin/dashboard/*" element={<Dashboard />} />
+          {/* photographer */}
+          <Route index path="/photographer/home" element={<Home />} />
+          <Route path="/photographer/messenger" element={<MessageList />} />
+          <Route path="/chatbox" element={<Chatbox />} />
+          <Route path="/profile/:id" element={<Profile />} />
+          <Route
+            path="/photographer/profile"
+            element={<PhotographerProfile />}
+          />
+          <Route path="/album/:id" element={<Album />} />
+          <Route
+            path="/photographer/package"
+            element={<PhotographyPackages />}
+          />
         </Routes>
       </BrowserRouter>
     </QueryClientProvider>
