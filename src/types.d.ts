@@ -35,7 +35,7 @@ export interface ApiResponse<T> {
   errors?: any;
 }
 export interface PackageModel {
-  id: number;
+  packageId: number;
   photographerId: number;
   packageName: string;
   description: string;

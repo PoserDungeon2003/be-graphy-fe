@@ -14,6 +14,7 @@ import Home from "./pages/home";
 import HomeNoLogin from "./pages/homeNoLogin";
 import Login from "./pages/login";
 import PhotographyPackages from "./pages/package";
+import PhotographersList from "./pages/photographers/photographers";
 import Profile from "./pages/profile.$id";
 import PhotographerProfile from "./pages/profilePhotographer/profilePhotographer";
 import UserProfile from "./pages/profileUser";
@@ -65,6 +66,7 @@ function App() {
           <Route path="/chatbox" element={<Chatbox />} />
           <Route path="/profile/:id" element={<Profile />} />
           <Route path="/user/profile" element={<UserProfile />} />
+          <Route path="/user/photographer" element={<PhotographersList />} />
           <Route path="/album/:id" element={<Album />} />
           <Route path="/user/package" element={<PhotographyPackages />} />
 

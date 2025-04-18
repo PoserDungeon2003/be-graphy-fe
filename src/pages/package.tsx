@@ -36,6 +36,7 @@ const PhotographyPackages = () => {
   }, []);
 
   const formatPackageForDisplay = (pkg: PackageModel) => {
+    console.log("formatPackageForDisplay", pkg.id);
     return {
       id: pkg.id,
       image: "https://cdn.5280.com/2024/10/WEB_analogheroimage-960x720.jpg",
@@ -54,13 +55,13 @@ const PhotographyPackages = () => {
   return (
     <div className="fixed inset-0 flex flex-col bg-gradient-to-r from-yellow-100 via-pink-100 to-purple-100">
       <div className="border-b bg-white px-6 py-4">
-      <button
-            onClick={() => navigate(-1)}
-            className="inline-flex items-center font-semibold text-[#9681FA]"
-          >
-            <IoChevronBackOutline className="h-5 w-5" />
-            Back
-          </button>
+        <button
+          onClick={() => navigate(-1)}
+          className="inline-flex items-center font-semibold text-[#9681FA]"
+        >
+          <IoChevronBackOutline className="h-5 w-5" />
+          Back
+        </button>
       </div>
       {/* Action buttons */}
       <div className="flex justify-between px-4 py-2">
@@ -108,7 +109,8 @@ const PhotographyPackages = () => {
             return (
               <div
                 key={displayPkg.id}
-                className="relative overflow-hidden rounded-lg bg-white shadow-md"
+                onClick={() => navigate(`/user/packages/${displayPkg.id}`)}
+                className="relative cursor-pointer overflow-hidden rounded-lg bg-white shadow-md transition hover:shadow-lg"
               >
                 <img
                   src="https://cdn.5280.com/2024/10/WEB_analogheroimage-960x720.jpg"
@@ -142,10 +144,18 @@ const PhotographyPackages = () => {
                       </p>
                     </div>
                     <div className="flex items-center">
-                      <button className="mr-2 text-blue-500">
+                      <button
+                        type="button"
+                        title="Like"
+                        className="mr-2 text-blue-500"
+                      >
                         <IoThumbsUp />
                       </button>
-                      <button className="text-gray-500">
+                      <button
+                        type="button"
+                        title="View"
+                        className="text-gray-500"
+                      >
                         <IoEye />
                       </button>
                     </div>

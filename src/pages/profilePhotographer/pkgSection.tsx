@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { IoAddCircleOutline } from "react-icons/io5";
-import { getPackages } from "../../api/package";
+import { getPackageById } from "../../api/package";
 import { PackageModel } from "../../types";
 import PackageItem from "./pkgItem";
 import PackageModal from "./pkgModal";
@@ -22,7 +22,7 @@ export default function PackageSection({
     setError("");
 
     try {
-      const result = await getPackages(photographerId);
+      const result = await getPackageById(photographerId);
       if (result.success) {
         setPackages(result.data || []);
       } else {

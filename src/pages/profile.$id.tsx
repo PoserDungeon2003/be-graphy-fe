@@ -61,7 +61,11 @@ export default function Profile() {
         ))}
         <div className="flex items-center justify-center rounded-3xl bg-gradient-to-r from-[#fff1b2] to-[#ffadf6]">
           <div className="flex flex-col items-center justify-center">
-            <button className="rounded-3xl bg-gradient-to-r from-[#cce5df] to-[#b5c4f4] px-10 py-4">
+            <button
+              type="button"
+              title="Add New Picture"
+              className="rounded-3xl bg-gradient-to-r from-[#cce5df] to-[#b5c4f4] px-10 py-4"
+            >
               <IoAdd className="size-8 text-white" />
             </button>
             <span className="text-md font-bold text-[#9681FA] uppercase">

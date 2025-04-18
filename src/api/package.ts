@@ -56,7 +56,7 @@ export const createPackage = async (data: PackageModel): Promise<ApiResponse<any
   }
 }
 
-export const getPackages = async (photographerId: number): Promise<ApiResponse<PackageModel[]>> => {
+export const getPackageById = async (photographerId: number): Promise<ApiResponse<PackageModel[]>> => {
   try {
     const response = await api.get(`/api/Package/Get_Packages_By_PhotographerId?id=${photographerId}`);
     if (response.status >= 200 && response.status < 300) {

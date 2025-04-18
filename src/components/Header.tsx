@@ -3,6 +3,7 @@ import { jwtDecode } from "jwt-decode";
 import _ from "lodash";
 import { useEffect, useState } from "react";
 import { FaSignOutAlt, FaUser } from "react-icons/fa";
+import { GrAnalytics } from "react-icons/gr";
 import { IoNotifications, IoPerson, IoSearch } from "react-icons/io5";
 import { NavLink, useNavigate } from "react-router";
 
@@ -29,8 +30,8 @@ const userNavItems = [
     to: "#",
   },
   {
-    name: "Contact us",
-    to: "#",
+    name: "Contact",
+    to: "/user/photographer",
   },
   {
     name: "Chat box",
@@ -94,6 +95,15 @@ export const Header = () => {
     }
   }, []);
 
+  const handleDashboard = () => {
+    // Navigate to role-specific profile page
+    if (userRole === "photographer") {
+      navigate("/photographer/dashboard");
+    } else {
+      navigate("/user/dashboard");
+    }
+  };
+
   const handleLogout = () => {
     // Clear auth token from localStorage
     localStorage.removeItem("authToken");
@@ -116,6 +126,17 @@ export const Header = () => {
           key: "1",
           label: (
             <button
+              onClick={handleDashboard}
+              className="flex w-full flex-row items-center gap-1.5 px-2 text-left hover:bg-gray-200"
+            >
+              <GrAnalytics /> Dashboard
+            </button>
+          ),
+        },
+        {
+          key: "2",
+          label: (
+            <button
               onClick={handleProfile}
               className="flex w-full flex-row items-center gap-1.5 px-2 text-left hover:bg-gray-200"
             >
@@ -124,7 +145,7 @@ export const Header = () => {
           ),
         },
         {
-          key: "2",
+          key: "3",
           label: (
             <button
               onClick={handleLogout}

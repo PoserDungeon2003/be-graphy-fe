@@ -111,6 +111,7 @@ export default function PhotographerProfile() {
           <div className="relative w-full">
             <IoSearch className="absolute top-1/2 ml-3 size-5 -translate-y-1/2 text-black" />
             <input
+              placeholder="Search"
               type="text"
               name="search"
               id="search"
