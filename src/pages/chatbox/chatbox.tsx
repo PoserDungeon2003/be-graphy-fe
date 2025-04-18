@@ -58,8 +58,8 @@ const Chatbox = () => {
             onClick={() => navigate(-1)}
             className="inline-flex items-center font-semibold text-[#9681FA]"
           >
-            <IoChevronBackOutline className="h-5 w-5" />
-            Back
+          <IoChevronBackOutline className="mr-1 h-5 w-5" />
+          Back
           </button>
       </div>
 

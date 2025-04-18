@@ -72,7 +72,7 @@ export default function PackageSection({
       ) : (
         <div className="flex flex-col gap-4">
           {packages.map((pkg) => (
-            <PackageItem key={pkg.id} pkg={pkg} />
+            <PackageItem key={pkg.packageId} pkg={pkg} />
           ))}
         </div>
       )}

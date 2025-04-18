@@ -29,32 +29,47 @@ export const getAllPackages = async (): Promise<ApiResponse<PackageModel[]>> => 
   }
 };
 
-export const createPackage = async (data: PackageModel): Promise<ApiResponse<any>> => {
+export const createPackage = async (
+  data: PackageModel
+): Promise<ApiResponse<any>> => {
   try {
-    const response: AxiosResponse = await api.post('/api/Package/Create_Package', data);
+    const token = localStorage.getItem("authToken");
+
+    const response: AxiosResponse = await api.post(
+      "/api/Package/Create_Package",
+      data,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
     if (response.status >= 200 && response.status < 300) {
       return {
         success: true,
         data: response.data,
       };
     } else {
+      console.error("Error response:", response);  // Log chi tiết lỗi response
       return {
         success: false,
-        message: response.data?.message || 'Không thể tạo gói chụp ảnh',
+        message: response.data?.message || "Không thể tạo gói chụp ảnh",
         errors: response.data?.errors,
       };
     }
   } catch (error: any) {
+    console.error("Error occurred:", error);  // Log chi tiết lỗi tại đây
     return {
       success: false,
       message:
         error.response?.data?.message ||
         error.message ||
-        'Lỗi hệ thống, vui lòng thử lại sau',
+        "Lỗi hệ thống, vui lòng thử lại sau",
       errors: error.response?.data?.errors || null,
     };
   }
-}
+};
 
 export const getPackageById = async (photographerId: number): Promise<ApiResponse<PackageModel[]>> => {
   try {

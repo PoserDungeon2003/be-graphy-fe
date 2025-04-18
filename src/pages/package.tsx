@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react";
 import {
   IoChevronBackOutline,
-  IoEye,
   IoFilter,
-  IoSearch,
-  IoThumbsUp,
+  IoSearch
 } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import { getAllPackages } from "../api/package";
@@ -21,7 +19,7 @@ const PhotographyPackages = () => {
       try {
         const response = await getAllPackages();
         if (response.success) {
-          setPackages(response.data);
+          setPackages(response.data || []);
         } else {
           setError(response.message || "Không thể tải dữ liệu gói chụp ảnh");
         }
@@ -36,9 +34,9 @@ const PhotographyPackages = () => {
   }, []);
 
   const formatPackageForDisplay = (pkg: PackageModel) => {
-    console.log("formatPackageForDisplay", pkg.id);
+    console.log("formatPackageForDisplay", pkg.packageId);
     return {
-      id: pkg.id,
+      id: pkg.packageId,
       image: "https://cdn.5280.com/2024/10/WEB_analogheroimage-960x720.jpg",
       price: `${pkg.price.toLocaleString()} VND`,
       name: pkg.packageName,
@@ -54,12 +52,12 @@ const PhotographyPackages = () => {
 
   return (
     <div className="fixed inset-0 flex flex-col bg-gradient-to-r from-yellow-100 via-pink-100 to-purple-100">
-      <div className="border-b bg-white px-6 py-4">
-        <button
+      <div className="absolute top-0 left-0 right-0 z-10 flex items-center justify-between bg-white p-4 shadow-md">
+      <button
           onClick={() => navigate(-1)}
           className="inline-flex items-center font-semibold text-[#9681FA]"
         >
-          <IoChevronBackOutline className="h-5 w-5" />
+          <IoChevronBackOutline className="mr-1 h-5 w-5" />
           Back
         </button>
       </div>
@@ -143,7 +141,7 @@ const PhotographyPackages = () => {
                         {displayPkg.price}
                       </p>
                     </div>
-                    <div className="flex items-center">
+                    {/* <div className="flex items-center">
                       <button
                         type="button"
                         title="Like"
@@ -158,7 +156,7 @@ const PhotographyPackages = () => {
                       >
                         <IoEye />
                       </button>
-                    </div>
+                    </div> */}
                   </div>
                   <p className="mt-1 text-sm text-gray-500">
                     {displayPkg.description}

@@ -39,7 +39,7 @@ export default function Login() {
         
         if (accessToken) {
           localStorage.setItem("authToken", accessToken);
-          
+          console.log("authToken",accessToken)
           // Decode JWT token to get user role
           try {
             const decoded: any = jwtDecode(accessToken);

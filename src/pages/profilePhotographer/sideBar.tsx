@@ -12,12 +12,12 @@ export default function Sidebar({ tabs }: SidebarProps) {
 
   return (
     <div className="flex w-1/3 flex-col items-center gap-6">
-      <div className="fixed top-0 left-0 z-50 w-full border-b bg-white px-6 py-4">
-        <button
+      <div className="absolute top-0 left-0 right-0 z-10 flex items-center justify-between bg-white p-4 shadow-md">
+      <button
           onClick={() => navigate(-1)}
           className="inline-flex items-center font-semibold text-[#9681FA]"
         >
-          <IoChevronBackOutline className="h-5 w-5" />
+          <IoChevronBackOutline className="mr-1 h-5 w-5" />
           Back
         </button>
       </div>

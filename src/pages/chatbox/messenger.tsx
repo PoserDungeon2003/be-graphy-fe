@@ -119,17 +119,17 @@ const MessageList = () => {
 
   return (
     <div className="fixed inset-0 flex flex-col bg-gradient-to-r from-yellow-100 via-pink-100 to-purple-100">
-      <div className="border-b bg-white px-6 py-4">
+      <div className="absolute top-0 right-0 left-0 z-10 flex items-center justify-between bg-white p-4 shadow-md">
         <button
           onClick={() => navigate(-1)}
           className="inline-flex items-center font-semibold text-[#9681FA]"
         >
-          <IoChevronBackOutline className="h-5 w-5" />
+          <IoChevronBackOutline className="mr-1 h-5 w-5" />
           Back
         </button>
       </div>
 
-      <div className="border-b bg-white px-6">
+      <div className="mt-20 px-6">
         <h1 className="text-center text-2xl font-bold text-[#9681FA]">
           MESSAGE
         </h1>
