@@ -1,5 +1,7 @@
+import { notification } from "antd";
 import { useState } from "react";
 import { IoClose } from "react-icons/io5";
+import { useNavigate } from "react-router";
 import { createPackage } from "../../api/package";
 import { PackageModel } from "../../types";
 
@@ -26,6 +28,7 @@ export default function PackageModal({
   });
 
   const [error, setError] = useState("");
+  const navigate = useNavigate();
   const userProfile = JSON.parse(
     localStorage.getItem("userProfile") || "{}"
   )
@@ -54,13 +57,22 @@ export default function PackageModal({
     const result = await createPackage(packageData as PackageModel);
 
     if (result.success) {
+      notification.success({
+        message: "Thành công",
+        description: "Gói chụp ảnh đã được tạo thành công.",
+      });
       onSave();
       onClose();
+      navigate(`/photographer/package`); // ⬅️ Chuyển hướng sau khi thành công
     } else {
       setError(result.message || "Không thể tạo gói");
+      notification.error({
+        message: "Lỗi",
+        description: result.message || "Không thể tạo gói",
+      });
     }
   };
-
+  
   if (!isOpen) return null;
 
   return (

@@ -16,45 +16,21 @@ import {
 import _ from "lodash";
 import { useState } from "react";
 import {
+  IoChevronBackOutline,
   IoLogoFacebook,
   IoLogoTwitter,
   IoSearch,
   IoSettingsOutline,
 } from "react-icons/io5";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { Album } from "../../types";
 import { getPhotographerIdFromToken } from "../../utils/getPhotographerId";
-import { tabs } from "./constants/tabs";
 import PackageSection from "./pkgSection";
-import Sidebar from "./sideBar";
 import SortableAlbum from "./sortableAlbum";
 
 export default function PhotographerProfile() {
-  const [albums, setAlbums] = useState<Album[]>([
-    {
-      id: "1",
-      style: "Studio",
-      author: "John Doe",
-      mainImage: "/images/landscape/landscape-1.png",
-      images: [
-        "/images/landscape/landscape-1.png",
-        "/images/landscape/landscape-1.png",
-        "/images/landscape/landscape-1.png",
-      ],
-    },
-    {
-      id: "2",
-      style: "Outdoor",
-      author: "Jane Smith",
-      mainImage: "/images/landscape/landscape-1.png",
-      images: [
-        "/images/landscape/landscape-1.png",
-        "/images/landscape/landscape-1.png",
-        "/images/landscape/landscape-1.png",
-      ],
-    },
-  ]);
-
+  const [albums, setAlbums] = useState<Album[]>([]);
+  const navigate = useNavigate();
   const photographerId = getPhotographerIdFromToken();
 
   const sensors = useSensors(
@@ -66,71 +42,88 @@ export default function PhotographerProfile() {
 
   function handleDragEnd(event: DragEndEvent) {
     const { active, over } = event;
-
     if (over && active.id !== over.id) {
       setAlbums((items) => {
         const oldIndex = items.findIndex((item) => item.id === active.id);
         const newIndex = items.findIndex((item) => item.id === over.id);
-
         return arrayMove(items, oldIndex, newIndex);
       });
     }
   }
 
   return (
-    <div className="flex items-start gap-4 pb-20">
-      <Sidebar tabs={tabs} />
+    <div className="min-h-screen bg-gray-50 pb-20">
+      {/* Header */}
+      <div className="sticky top-0 z-10 flex items-center justify-between bg-white px-6 py-4 shadow-md">
+        <button
+          onClick={() => navigate(-1)}
+          className="inline-flex items-center text-[#9681FA] font-semibold"
+        >
+          <IoChevronBackOutline className="mr-1 h-5 w-5" />
+          Back
+        </button>
+        <div className="flex items-center gap-4">
+          <IoSettingsOutline className="size-6 text-gray-700 cursor-pointer" />
+        </div>
+      </div>
 
-      <div className="flex h-full w-2/3 flex-1 flex-col gap-6 px-4 pt-12">
-        <div className="mt-3 mb-14">
-          <span className="text-2xl font-bold text-black uppercase">
+      {/* Main Content */}
+      <div className="mx-auto max-w-7xl px-4 pt-8">
+        {/* Intro Section */}
+        <section className="mb-10">
+          <h1 className="text-2xl font-bold uppercase text-gray-800 mb-4">
             Giới thiệu
-          </span>
-          <div className="relative bg-[#93DDD4] py-5 text-center">
-            <span className="text-black">Welcome Photographer!</span>
-            <div className="absolute right-0 bottom-0 flex translate-y-1/2 items-center gap-4">
+          </h1>
+          <div className="relative rounded-lg bg-[#93DDD4] py-6 px-6 text-center shadow">
+            <p className="text-lg text-gray-800 font-medium">
+              Welcome Photographer!
+            </p>
+            <div className="absolute right-4 bottom-0 translate-y-1/2 flex gap-3">
               <Link
                 to={"#"}
                 target="_blank"
-                className="rounded-md border border-[#2C2C2C] bg-[#F5F5F5] p-2 text-base font-medium text-[#2C2C2C]"
+                className="rounded-full border border-gray-700 bg-white p-2 hover:bg-gray-100"
               >
-                <IoLogoFacebook className="size-8" />
+                <IoLogoFacebook className="size-6 text-gray-700" />
               </Link>
               <Link
                 to={"#"}
                 target="_blank"
-                className="rounded-md border border-[#2C2C2C] bg-[#F5F5F5] p-2 text-base font-medium text-[#2C2C2C]"
+                className="rounded-full border border-gray-700 bg-white p-2 hover:bg-gray-100"
               >
-                <IoLogoTwitter className="size-8" />
+                <IoLogoTwitter className="size-6 text-gray-700" />
               </Link>
             </div>
           </div>
-        </div>
+        </section>
 
-        <div className="flex justify-between px-4">
-          <div className="relative w-full">
-            <IoSearch className="absolute top-1/2 ml-3 size-5 -translate-y-1/2 text-black" />
+        {/* Search */}
+        <section className="mb-10 flex justify-between items-center">
+          <div className="relative w-full max-w-md">
+            <IoSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-600" />
             <input
-              placeholder="Search"
               type="text"
-              name="search"
               id="search"
-              className="w-96 rounded-md bg-[#93DDD4] py-4 pr-4 pl-10 text-black focus:outline-0"
+              name="search"
+              placeholder="Tìm kiếm album..."
+              className="w-full rounded-lg bg-white pl-10 pr-4 py-3 shadow-sm border border-gray-300 text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#93DDD4]"
             />
           </div>
-          <div className="flex items-center gap-4">
-            <IoSettingsOutline className="size-10 cursor-pointer text-black" />
-          </div>
-        </div>
+        </section>
 
-        {/* Package Management Section */}
-        <PackageSection photographerId={photographerId} />
+        {/* Packages */}
+        <section className="mb-12">
+          <PackageSection photographerId={photographerId} />
+        </section>
 
-        {/* Albums Section */}
-        <div className="mt-8">
-          <div className="mb-4 flex items-center justify-between">
-            <h2 className="text-2xl font-bold text-black uppercase">Albums</h2>
+        {/* Albums */}
+        <section>
+          <div className="mb-6 flex items-center justify-between">
+            <h2 className="text-2xl font-bold uppercase text-gray-800">
+              Albums
+            </h2>
           </div>
+
           <DndContext
             sensors={sensors}
             collisionDetection={closestCenter}
@@ -140,14 +133,14 @@ export default function PhotographerProfile() {
               items={_.map(albums, (album) => album.id)}
               strategy={verticalListSortingStrategy}
             >
-              <div className="flex flex-col gap-4">
-                {_.map(albums, (album) => (
+              <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                {albums.map((album) => (
                   <SortableAlbum key={album.id} album={album} />
                 ))}
               </div>
             </SortableContext>
           </DndContext>
-        </div>
+        </section>
       </div>
     </div>
   );

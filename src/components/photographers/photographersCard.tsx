@@ -1,13 +1,14 @@
 import React from 'react';
 import { IoCameraOutline } from 'react-icons/io5';
+import { useNavigate } from 'react-router-dom';
 
 export interface PhotographerProps {
   photographerId: number;
   userId: number;
   bio: string;
   portfolioUrl: string;
-  rating?: number;  // Đánh dấu là có thể undefined
-  location?: string;  // Đánh dấu là có thể undefined
+  rating?: number;
+  location?: string;
 }
 
 const PhotographerCard: React.FC<PhotographerProps> = ({
@@ -18,8 +19,17 @@ const PhotographerCard: React.FC<PhotographerProps> = ({
   rating,
   location,
 }) => {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(`/user/photographer/${photographerId}`);
+  };
+
   return (
-    <div className="bg-white rounded-2xl shadow-md p-4 flex flex-col items-center text-center hover:shadow-xl transition-all duration-300">
+    <div
+      onClick={handleClick}
+      className="bg-white rounded-2xl shadow-md p-4 flex flex-col items-center text-center hover:shadow-xl transition-all duration-300 cursor-pointer"
+    >
       <img
         src={portfolioUrl}
         alt={`Photographer #${photographerId}`}
@@ -30,10 +40,10 @@ const PhotographerCard: React.FC<PhotographerProps> = ({
       </h3>
       <p className="text-gray-600 mt-2 text-sm">Bio: {bio || "Đang cập nhật..."}</p>
       <p className="text-gray-500 text-sm">
-        Location: {location || "Đang cập nhật..."} {/* Hiển thị nếu không có location */}
+        Location: {location || "Đang cập nhật..."}
       </p>
       <p className="text-yellow-500 text-sm">
-        Rating: {rating ? `${rating} ⭐` : "0 ⭐"} {/* Hiển thị nếu không có rating */}
+        Rating: {rating ? `${rating} ⭐` : "0 ⭐"}
       </p>
     </div>
   );

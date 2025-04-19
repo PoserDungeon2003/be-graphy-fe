@@ -44,10 +44,6 @@ const photographerNavItems = [
     name: "Packages",
     to: "/photographer/package",
   },
-  // {
-  //   name: "Gallery",
-  //   to: "/photographer/gallery",
-  // },
   {
     name: "Contact",
     to: "/photographer/photographer",

@@ -212,7 +212,7 @@ export default function UserProfile() {
         ))}
       </div>
       <div className="flex h-full w-2/3 flex-1 flex-col gap-6 px-4 pt-12">
-        <div className="mt-3 mb-14">
+        <div className="mt-5 mb-14">
           <span className="text-2xl font-bold text-black uppercase">
             Giới thiệu
           </span>

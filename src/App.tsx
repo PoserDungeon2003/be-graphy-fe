@@ -15,6 +15,8 @@ import HomeNoLogin from "./pages/homeNoLogin";
 import Login from "./pages/login";
 import PhotographyPackages from "./pages/package";
 import PhotographyPackagesDetails from "./pages/packagesDetails";
+import PhotographerDetails from "./pages/photographers/photographerDetails";
+import PhotographerPackagesDetails from "./pages/photographers/photographerPackages";
 import PhotographersList from "./pages/photographers/photographers";
 import Profile from "./pages/profile.$id";
 import PhotographerProfile from "./pages/profilePhotographer/profilePhotographer";
@@ -69,6 +71,8 @@ function App() {
           <Route path="/user/profile" element={<UserProfile />} />
           <Route path="/user/photographer" element={<PhotographersList />} />
           <Route path="/user/packages/:id" element={<PhotographyPackagesDetails />} />
+          <Route path="/user/photographer/:id" element={<PhotographerDetails />} />
+          <Route path="/user/photographer/:id/packages" element={<PhotographerPackagesDetails />} />
           <Route path="/album/:id" element={<Album />} />
           <Route path="/user/package" element={<PhotographyPackages />} />
 
@@ -76,6 +80,7 @@ function App() {
           <Route index path="/photographer/home" element={<Home />} />
           <Route path="/photographer/messenger" element={<MessageList />} />
           <Route path="/photographer/photographer" element={<PhotographersList />} />
+          <Route path="/photographer/:id" element={<PhotographerDetails />} />
           <Route path="/chatbox" element={<Chatbox />} />
           <Route path="/profile/:id" element={<Profile />} />
           <Route
