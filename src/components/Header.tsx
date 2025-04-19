@@ -26,10 +26,6 @@ const userNavItems = [
     to: "/user/package",
   },
   {
-    name: "Pictures",
-    to: "#",
-  },
-  {
     name: "Contact",
     to: "/user/photographer",
   },
@@ -48,13 +44,13 @@ const photographerNavItems = [
     name: "Packages",
     to: "/photographer/package",
   },
+  // {
+  //   name: "Gallery",
+  //   to: "/photographer/gallery",
+  // },
   {
-    name: "Gallery",
-    to: "/photographer/gallery",
-  },
-  {
-    name: "Contact us",
-    to: "#",
+    name: "Contact",
+    to: "/photographer/photographer",
   },
   {
     name: "Chat box",

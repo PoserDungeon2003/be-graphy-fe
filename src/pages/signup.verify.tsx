@@ -79,6 +79,7 @@ export default function SignupVerify() {
                 className="absolute inset-0"
               />
               <input
+                placeholder="0"
                 ref={(el) => {
                   inputRefs.current[index] = el;
                 }}

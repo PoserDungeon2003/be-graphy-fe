@@ -13,7 +13,7 @@ const PhotographersList: React.FC = () => {
   useEffect(() => {
     const fetchPhotographers = async () => {
       try {
-        const res = await getAllPhotographers(); // res là Photographer[]
+        const res = await getAllPhotographers();
         setPhotographers(res);
       } catch (err: any) {
         setError(err.message || "Không thể lấy danh sách photographer.");

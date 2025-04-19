@@ -54,3 +54,35 @@ export interface Tab {
   name: string;
   key: string;
 }
+
+export interface Photographer {
+  photographerId: number;
+  userId: number;
+  bio: string;
+  portfolioUrl: string;
+  rating: number;
+  location: string;
+  createdAt: string;
+  availabilities: any[];
+  bookings: any[];
+  conversations: any[];
+  packages: any[];
+  photos: any[];
+  user: any | null;
+}
+export interface UserProfile {
+  userId: number;
+  name: string;
+  email: string;
+  password: string;
+  role: string;
+  phoneNumber: string;
+  profilePicture: string | null;
+  createdAt: string;
+  updatedAt: string;
+  bookings: any[];
+  conversations: any[];
+  messages: any[];
+  notifications: any[];
+  photographer: Photographer | null;
+}

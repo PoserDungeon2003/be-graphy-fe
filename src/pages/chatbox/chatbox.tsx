@@ -90,10 +90,10 @@ const Chatbox = () => {
                 onChange={(e) => setInputMessage(e.target.value)}
                 className="flex-1 bg-transparent px-4 text-gray-800 placeholder-gray-500 outline-none"
               />
-              <button type="button" className="mx-2 text-gray-500 hover:text-gray-700" onClick={() => setShowEmojiPicker(!showEmojiPicker)}>
+              <button type="button" title="Emotion" className="mx-2 text-gray-500 hover:text-gray-700" onClick={() => setShowEmojiPicker(!showEmojiPicker)}>
                 <FaSmile size={20} />
               </button>
-              <button type="submit" disabled={!inputMessage.trim()} className="rounded-full bg-purple-100 p-2 text-purple-500 hover:bg-purple-200 disabled:opacity-50">
+              <button type="submit" title="Send" disabled={!inputMessage.trim()} className="rounded-full bg-purple-100 p-2 text-purple-500 hover:bg-purple-200 disabled:opacity-50">
                 <FiSend size={20} />
               </button>
             </div>
