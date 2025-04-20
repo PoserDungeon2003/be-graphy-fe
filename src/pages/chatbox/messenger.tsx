@@ -1,5 +1,5 @@
 import { IoChevronBackOutline } from "react-icons/io5";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Messenges } from "../../types";
 
 const messages: Messenges[] = [
@@ -67,7 +67,7 @@ const messages: Messenges[] = [
     is_read: true,
     sent_at: new Date("2024-02-18T18:00:00Z"),
   },
-   {
+  {
     messenger_id: 1,
     conversation_id: 101,
     sender_id: 1,
@@ -103,7 +103,9 @@ const messages: Messenges[] = [
 
 const formatTime = (date: Date) => {
   const now = new Date();
-  const diffInHours = Math.floor((now.getTime() - date.getTime()) / (1000 * 60 * 60));
+  const diffInHours = Math.floor(
+    (now.getTime() - date.getTime()) / (1000 * 60 * 60),
+  );
 
   if (diffInHours < 24) {
     return `${diffInHours}h ago`;
@@ -113,17 +115,24 @@ const formatTime = (date: Date) => {
 };
 
 const MessageList = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="fixed inset-0 flex flex-col bg-gradient-to-r from-yellow-100 via-pink-100 to-purple-100">
-      <div className="border-b bg-white px-6 py-4">
-        <Link to="/user/home" className="inline-flex items-center font-semibold text-[#9681FA]">
-          <IoChevronBackOutline className="h-5 w-5" />
+      <div className="absolute top-0 right-0 left-0 z-10 flex items-center justify-between bg-white p-4 shadow-md">
+        <button
+          onClick={() => navigate(-1)}
+          className="inline-flex items-center font-semibold text-[#9681FA]"
+        >
+          <IoChevronBackOutline className="mr-1 h-5 w-5" />
           Back
-        </Link>
+        </button>
       </div>
 
-      <div className="border-b bg-white px-6">
-        <h1 className="text-center text-2xl font-bold text-[#9681FA]">MESSAGE</h1>
+      <div className="mt-20 px-6">
+        <h1 className="text-center text-2xl font-bold text-[#9681FA]">
+          MESSAGE
+        </h1>
       </div>
 
       <div className="animate-fade-in flex-1 overflow-y-auto pb-5">
@@ -139,9 +148,13 @@ const MessageList = () => {
             </div>
             <div className="min-w-0 flex-1">
               <div className="flex items-center justify-between">
-                <h3 className="truncate text-lg font-bold text-black">User {msg.sender_id}</h3>
+                <h3 className="truncate text-lg font-bold text-black">
+                  User {msg.sender_id}
+                </h3>
               </div>
-              <p className={`mt-1 truncate ${msg.is_read ? 'text-gray-800' : 'text-black font-semibold'}`}>
+              <p
+                className={`mt-1 truncate ${msg.is_read ? "text-gray-800" : "font-semibold text-black"}`}
+              >
                 {msg.content}
               </p>
             </div>

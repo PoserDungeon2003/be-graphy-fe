@@ -1,11 +1,11 @@
 import _ from "lodash";
 import {
-  IoArrowForward,
-  IoChevronBack,
-  IoOptionsOutline,
-  IoSearchOutline
+    IoArrowForward,
+    IoChevronBack,
+    IoOptionsOutline,
+    IoSearchOutline
 } from "react-icons/io5";
-import { Link, useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router-dom";
 import { Footer, Header, PhotoPost } from "../components";
 
 const landscape = [

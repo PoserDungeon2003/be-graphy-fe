@@ -2,7 +2,7 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { IoChevronBackOutline } from "react-icons/io5";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router-dom";
 import { object, string } from "yup";
 import { registerUser } from "../api/register";
 import { RegisterRQ } from "../types";
@@ -23,6 +23,7 @@ export default function Register() {
     mode: "onChange",
     resolver: yupResolver(schema),
   });
+  const navigate = useNavigate();
 
   const onSubmit = async (data: RegisterRQ) => {
     const result = await registerUser(data);
@@ -49,13 +50,13 @@ export default function Register() {
   return (
     <div className="relative flex h-full w-full flex-col items-center justify-center overflow-y-hidden">
       <div className="absolute top-0 left-0 mt-4 ml-4">
-        <Link
-          to={"/"}
-          className="flex items-center gap-1 font-bold text-[#9681FA]"
-        >
-          <IoChevronBackOutline className="mt-1 size-5" />
-          Back
-        </Link>
+      <button
+            onClick={() => navigate(-1)}
+            className="inline-flex items-center font-semibold text-[#9681FA]"
+          >
+            <IoChevronBackOutline className="h-5 w-5" />
+            Back
+          </button>
       </div>
       <img
         src="/images/effect/gradient_green_r.png"

@@ -1,10 +1,11 @@
 import _ from "lodash";
 import { useRef } from "react";
 import { IoChevronBackOutline } from "react-icons/io5";
-import { Link } from "react-router";
+import { useNavigate } from "react-router-dom";
 
 export default function SignupVerify() {
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
+  const navigate = useNavigate();
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -37,13 +38,13 @@ export default function SignupVerify() {
   return (
     <div className="relative flex h-full w-full flex-col items-center justify-center gap-8 overflow-y-hidden xl:gap-12">
       <div className="absolute top-0 left-0 mt-4 ml-4">
-        <Link
-          to={"/"}
-          className="flex items-center gap-1 font-bold text-[#9681FA]"
-        >
-          <IoChevronBackOutline className="mt-1 size-5" />
-          Back
-        </Link>
+      <button
+            onClick={() => navigate(-1)}
+            className="inline-flex items-center font-semibold text-[#9681FA]"
+          >
+            <IoChevronBackOutline className="h-5 w-5" />
+            Back
+          </button>
       </div>
       <img
         src="/images/effect/gradient_green_r.png"
@@ -78,6 +79,7 @@ export default function SignupVerify() {
                 className="absolute inset-0"
               />
               <input
+                placeholder="0"
                 ref={(el) => {
                   inputRefs.current[index] = el;
                 }}

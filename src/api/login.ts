@@ -1,5 +1,6 @@
 import { AxiosResponse } from "axios";
 import api from ".";
+import { UserProfile } from "../types";
 
 export interface LoginRequest {
   email: string;
@@ -8,7 +9,6 @@ export interface LoginRequest {
 
 export interface LoginResponse {
   accessToken?: string;
-  refreshToken?: string;
   user?: {
     id: string;
     email: string;
@@ -66,6 +66,27 @@ export const loginUser = async (
         error.message ||
         "Lỗi hệ thống, vui lòng thử lại",
       errors: error.response?.data?.errors || null,
+    };
+  }
+};
+
+export const getProfile = async (): Promise<ApiResponse<UserProfile>> => {
+  try {
+    const token = localStorage.getItem('authToken');
+
+    const response = await api.post<ApiResponse<UserProfile>>('/api/Auth/Get_Profile', {},{
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    
+    return response.data;
+  } catch (error: any) {
+    console.error("Profile fetch error details:", error);
+    return {
+      success: false,
+      message: error.response?.data?.message || 'An error occurred while fetching profile.',
+      errors: error.response?.data?.errors || error,
     };
   }
 };

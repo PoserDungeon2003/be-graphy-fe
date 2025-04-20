@@ -2,9 +2,9 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { IoChevronBackOutline } from "react-icons/io5";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 import { object, string } from "yup";
 import { registerUser } from "../api/register";
 import { SignupRQ } from "../types";
@@ -42,6 +42,7 @@ export default function Signup() {
   const [isLoading, setIsLoading] = useState(false);
   const [apiError, setApiError] = useState<string | null>(null);
   const profilePicUrl = watch("profilePic");
+  const navigate = useNavigate();
 
   const onSubmit = async (data: SignupRQ) => {
     setIsLoading(true);
@@ -99,13 +100,13 @@ export default function Signup() {
   return (
     <div className="relative flex h-full w-full flex-col items-center justify-center overflow-y-hidden">
       <div className="absolute top-0 left-0 mt-4 ml-4">
-        <Link
-          to="/"
-          className="flex items-center gap-1 font-bold text-[#9681FA]"
+        <button
+          onClick={() => navigate(-1)}
+          className="inline-flex items-center font-semibold text-[#9681FA]"
         >
-          <IoChevronBackOutline className="mt-1 size-5" />
+          <IoChevronBackOutline className="h-5 w-5" />
           Back
-        </Link>
+        </button>
       </div>
       <img
         src="/images/effect/gradient_green_r.png"

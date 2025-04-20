@@ -1,30 +1,29 @@
-import { yupResolver } from "@hookform/resolvers/yup";
+import { jwtDecode } from "jwt-decode";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { IoChevronBackOutline } from "react-icons/io5";
-import { Link } from "react-router";
-import { useNavigate } from "react-router-dom";
-import { object, string } from "yup";
-import { loginUser } from "../api/login";
+import { Link, useNavigate } from "react-router-dom";
+import { getProfile, loginUser } from "../api/login";
 import { LoginRQ } from "../types";
-
-const schema = object({
-  email: string().email().required().trim(),
-  password: string().required().trim(),
-});
 
 export default function Login() {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [loginError, setLoginError] = useState<string | null>(null);
 
+  // Hardcoded admin account
+  const adminAccount = {
+    email: "admin@gmail.com",
+    password: "123", // Add password for comparison
+    role: "admin",
+  };
+  
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<LoginRQ>({
     mode: "onChange",
-    resolver: yupResolver(schema),
   });
 
   const onSubmit = async (data: LoginRQ) => {
@@ -32,15 +31,83 @@ export default function Login() {
       setIsLoading(true);
       setLoginError(null);
 
+      // Check if this is the hardcoded admin account
+      if (data.email === adminAccount.email && data.password === adminAccount.password) {
+        // Create a mock token or use a placeholder
+        const mockAdminToken = "admin-mock-token";
+        localStorage.setItem("authToken", mockAdminToken);
+        
+        // Store admin profile
+        const adminProfile = {
+          userId: "admin-id",
+          email: adminAccount.email,
+          name: "Admin User",
+          role: adminAccount.role,
+        };
+        
+        localStorage.setItem("userProfile", JSON.stringify(adminProfile));
+        
+        // Navigate to admin dashboard
+        navigate("/admin/dashboard/wallet");
+        return;
+      }
+
+      // Normal login flow for non-admin accounts
       const response = await loginUser(data);
       if (response.success) {
-        if (response.data?.accessToken) {
-          localStorage.setItem("authToken", response.data.accessToken);
-        }
-        if (response.data?.user?.role === "admin") {
-          navigate("/admin/dashboard/customers");
+        const { accessToken } = response.data || {};
+
+        if (accessToken) {
+          localStorage.setItem("authToken", accessToken);
+
+          // Decode JWT token to get user role
+          try {
+            const decoded: any = jwtDecode(accessToken);
+
+            // Extract user information directly from the JWT if profile API is not working
+            const userInfo = {
+              userId: decoded.UserId || decoded.userId || decoded.sub,
+              email: decoded.Email || decoded.email,
+              name: decoded.Name || decoded.name,
+              role: decoded.Role || decoded.role,
+            };
+
+            // Try to fetch complete profile, but don't block navigation if it fails
+            try {
+              const profileResponse = await getProfile();
+              if (profileResponse !== null) {
+                localStorage.setItem(
+                  "userProfile",
+                  JSON.stringify(profileResponse),
+                );
+              } else {
+                console.warn(
+                  "Could not fetch detailed profile, using JWT data only",
+                );
+              }
+            } catch (profileError) {
+              console.warn(
+                "Profile fetch failed, continuing with JWT data only",
+                profileError,
+              );
+            }
+
+            const userRole = decoded.Role?.toLowerCase() || decoded.role?.toLowerCase();
+            
+            // Navigate based on role
+            if (userRole === "photographer") {
+              navigate("/photographer/home");
+            } else if (userRole === "customer" || userRole === "user") {
+              navigate("/user/home");
+            } else {
+              setLoginError("Không thể xác định vai trò người dùng");
+            }
+          } catch (decodeError) {
+            console.error("Token decode error:", decodeError);
+            setLoginError("Lỗi xác thực token, vui lòng đăng nhập lại");
+          }
         } else {
-          navigate("/user/home");
+          setLoginError("Không nhận được token xác thực");
         }
       } else {
         setLoginError(response.message || "Đăng nhập thất bại");
@@ -77,16 +144,22 @@ export default function Login() {
         className="mt-8 flex flex-col items-center justify-center gap-4"
       >
         {loginError && (
-          <div className="w-1/3 rounded bg-red-100 p-3 text-center text-red-700 font-bold">
+          <div className="w-1/3 rounded bg-red-100 p-3 text-center font-bold text-red-700">
             {loginError}
           </div>
         )}
-        
+
         <div className="w-1/3 space-y-1">
           <div className="relative">
             <img src="/images/background/bg_input.png" alt="input background" />
             <input
-              {...register("email")}
+              {...register("email", {
+                required: "Email is required",
+                pattern: {
+                  value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                  message: "Invalid email format",
+                },
+              })}
               type="email"
               name="email"
               id="email"
@@ -105,7 +178,9 @@ export default function Login() {
           <div className="relative">
             <img src="/images/background/bg_input.png" alt="input background" />
             <input
-              {...register("password")}
+              {...register("password", {
+                required: "Password is required",
+              })}
               type="password"
               name="password"
               id="password"
@@ -125,11 +200,36 @@ export default function Login() {
           disabled={isLoading}
           className={`mt-4 rounded-full px-12 py-3 font-bold text-white uppercase ${
             isLoading
-              ? "bg-indigo-300 cursor-not-allowed"
-              : "bg-indigo-400 cursor-pointer active:bg-indigo-500"
+              ? "cursor-not-allowed bg-indigo-300"
+              : "cursor-pointer bg-indigo-400 active:bg-indigo-500"
           }`}
         >
-          {isLoading ? "Đang xử lý..." : "Log in"}
+          {isLoading ? (
+            <div className="flex items-center gap-2">
+              <svg
+                className="h-5 w-5 animate-spin text-white"
+                viewBox="0 0 24 24"
+                fill="none"
+              >
+                <circle
+                  className="opacity-25"
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  stroke="currentColor"
+                  strokeWidth="4"
+                />
+                <path
+                  className="opacity-75"
+                  fill="currentColor"
+                  d="M4 12a8 8 0 018-8v8H4z"
+                />
+              </svg>
+              Đang xử lý...
+            </div>
+          ) : (
+            "Log in"
+          )}
         </button>
         <span className="font-bold text-black uppercase">
           Create account?{" "}

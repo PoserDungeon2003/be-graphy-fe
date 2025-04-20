@@ -69,7 +69,7 @@ const Wallet = () => {
           <div className="bg-white rounded-lg shadow-lg p-6 h-full">
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-xl font-bold text-gray-800">Payment Methods</h2>
-              <button className="text-blue-500 hover:text-blue-600">
+              <button type="button" title="IoAddCircleOutline" className="text-blue-500 hover:text-blue-600">
                 <IoAddCircleOutline size={24} />
               </button>
             </div>
