@@ -86,3 +86,34 @@ export interface UserProfile {
   notifications: any[];
   photographer: Photographer | null;
 }
+export interface User {
+  userId: number;
+  name: string;
+  email: string;
+  password: string;
+  role: string;
+  phoneNumber: string;
+  profilePicture: string | null;
+  createdAt: string;
+  updatedAt: string;
+  bookings: any[];
+  conversations: any[];
+  messages: any[];
+  notifications: any[];
+  photographer: any | null;
+}
+export interface Booking {
+  bookingId: number;
+  customerId: number;
+  photographerId: number;
+  eventDate: string;
+  eventLocation: string;
+  status: string;
+  totalPrice: number;
+  createdAt: string;
+  updatedAt: string;
+}
+export interface BookingAnalytics {
+  bookingAna: Record<string, number>;
+  incomeAna: Record<string, number>;
+}

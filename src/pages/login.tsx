@@ -7,20 +7,24 @@ import { useNavigate } from "react-router-dom";
 import { getProfile, loginUser } from "../api/login";
 import { LoginRQ } from "../types";
 
-// Note: Removed yupResolver import as we'll handle validation differently
-
 export default function Login() {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [loginError, setLoginError] = useState<string | null>(null);
 
+  // Hardcoded admin account
+  const adminAccount = {
+    email: "admin@gmail.com",
+    password: "123", // Add password for comparison
+    role: "admin",
+  };
+  
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<LoginRQ>({
     mode: "onChange",
-    // Using built-in validation instead of yup for simplicity
   });
 
   const onSubmit = async (data: LoginRQ) => {
@@ -28,6 +32,28 @@ export default function Login() {
       setIsLoading(true);
       setLoginError(null);
 
+      // Check if this is the hardcoded admin account
+      if (data.email === adminAccount.email && data.password === adminAccount.password) {
+        // Create a mock token or use a placeholder
+        const mockAdminToken = "admin-mock-token";
+        localStorage.setItem("authToken", mockAdminToken);
+        
+        // Store admin profile
+        const adminProfile = {
+          userId: "admin-id",
+          email: adminAccount.email,
+          name: "Admin User",
+          role: adminAccount.role,
+        };
+        
+        localStorage.setItem("userProfile", JSON.stringify(adminProfile));
+        
+        // Navigate to admin dashboard
+        navigate("/admin/dashboard/wallet");
+        return;
+      }
+
+      // Normal login flow for non-admin accounts
       const response = await loginUser(data);
       if (response.success) {
         const { accessToken } = response.data || {};
@@ -50,7 +76,6 @@ export default function Login() {
             // Try to fetch complete profile, but don't block navigation if it fails
             try {
               const profileResponse = await getProfile();
-              debugger
               if (profileResponse !== null) {
                 localStorage.setItem(
                   "userProfile",
@@ -68,9 +93,9 @@ export default function Login() {
               );
             }
 
-            // Navigate based on user role from JWT
-            const userRole = decoded.Role?.toLowerCase();
-
+            const userRole = decoded.Role?.toLowerCase() || decoded.role?.toLowerCase();
+            
+            // Navigate based on role
             if (userRole === "photographer") {
               navigate("/photographer/home");
             } else if (userRole === "customer" || userRole === "user") {

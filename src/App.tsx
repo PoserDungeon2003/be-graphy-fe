@@ -7,6 +7,7 @@ import { useState } from "react";
 import { BrowserRouter, Outlet, Route, Routes } from "react-router";
 import "./App.css";
 import { Layout } from "./layouts";
+import Dashboard from "./pages/admin";
 import Album from "./pages/album.$id";
 import Chatbox from "./pages/chatbox/chatbox";
 import MessageList from "./pages/chatbox/messenger";
@@ -70,16 +71,28 @@ function App() {
           <Route path="/profile/:id" element={<Profile />} />
           <Route path="/user/profile" element={<UserProfile />} />
           <Route path="/user/photographer" element={<PhotographersList />} />
-          <Route path="/user/packages/:id" element={<PhotographyPackagesDetails />} />
-          <Route path="/user/photographer/:id" element={<PhotographerDetails />} />
-          <Route path="/user/photographer/:id/packages" element={<PhotographerPackagesDetails />} />
+          <Route
+            path="/user/packages/:id"
+            element={<PhotographyPackagesDetails />}
+          />
+          <Route
+            path="/user/photographer/:id"
+            element={<PhotographerDetails />}
+          />
+          <Route
+            path="/user/photographer/:id/packages"
+            element={<PhotographerPackagesDetails />}
+          />
           <Route path="/album/:id" element={<Album />} />
           <Route path="/user/package" element={<PhotographyPackages />} />
 
           {/* photographer */}
           <Route index path="/photographer/home" element={<Home />} />
           <Route path="/photographer/messenger" element={<MessageList />} />
-          <Route path="/photographer/photographer" element={<PhotographersList />} />
+          <Route
+            path="/photographer/photographer"
+            element={<PhotographersList />}
+          />
           <Route path="/photographer/:id" element={<PhotographerDetails />} />
           <Route path="/chatbox" element={<Chatbox />} />
           <Route path="/profile/:id" element={<Profile />} />
@@ -92,6 +105,9 @@ function App() {
             path="/photographer/package"
             element={<PhotographyPackages />}
           />
+
+          {/* admin */}
+          <Route index path="/admin/dashboard/*" element={<Dashboard />} />
         </Routes>
       </BrowserRouter>
     </QueryClientProvider>

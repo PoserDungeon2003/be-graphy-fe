@@ -1,8 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import NotFound from "../../components/NotFound";
+import Bookings from './bookings';
 import Customers from "./customers";
-import Photographers from "./photographers";
-import PhotoProjects from "./photoProjects";
 import Sidebar from "./sidebar";
 import Wallet from "./wallet";
 
@@ -12,10 +11,9 @@ function Dashboard() {
       <Sidebar />
       <div className="flex-1 h-screen">
         <Routes>
-          <Route path="customers" element={<Customers />} />
-          <Route path="photographers" element={<Photographers />} />
-          <Route path="photo-projects" element={<PhotoProjects />} />
-          <Route path="wallet" element={<Wallet />} />
+          <Route path="/admin/dashboard/customers" element={<Customers />} />
+          <Route path="/admin/dashboard/wallet" element={<Wallet />} />
+          <Route path="/admin/dashboard/bookings" element={<Bookings />} />
 
           {/* Route cho trang không tìm thấy */}
           <Route path="*" element={<NotFound />} />
