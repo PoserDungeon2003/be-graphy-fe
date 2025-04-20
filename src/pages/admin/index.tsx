@@ -11,11 +11,12 @@ function Dashboard() {
       <Sidebar />
       <div className="flex-1 h-screen">
         <Routes>
-          <Route path="/admin/dashboard/customers" element={<Customers />} />
-          <Route path="/admin/dashboard/wallet" element={<Wallet />} />
-          <Route path="/admin/dashboard/bookings" element={<Bookings />} />
-
-          {/* Route cho trang không tìm thấy */}
+          <Route path="customers" element={<Customers />} />
+          <Route path="wallet" element={<Wallet />} />
+          <Route path="bookings" element={<Bookings />} />
+          
+          <Route index element={<Wallet />} />
+          
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>

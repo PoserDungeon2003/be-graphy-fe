@@ -19,10 +19,9 @@ import {
   IoChevronBackOutline,
   IoLogoFacebook,
   IoLogoTwitter,
-  IoSearch,
-  IoSettingsOutline,
+  IoSettingsOutline
 } from "react-icons/io5";
-import { Link, useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router-dom";
 import { Album } from "../../types";
 import { getPhotographerIdFromToken } from "../../utils/getPhotographerId";
 import PackageSection from "./pkgSection";
@@ -52,7 +51,7 @@ export default function PhotographerProfile() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 pb-20">
+    <div className="bg-gradient-to-r from-yellow-100 via-pink-100 to-purple-100 pb-20">
       {/* Header */}
       <div className="sticky top-0 z-10 flex items-center justify-between bg-white px-6 py-4 shadow-md">
         <button
@@ -71,9 +70,6 @@ export default function PhotographerProfile() {
       <div className="mx-auto max-w-7xl px-4 pt-8">
         {/* Intro Section */}
         <section className="mb-10">
-          <h1 className="text-2xl font-bold uppercase text-gray-800 mb-4">
-            Giới thiệu
-          </h1>
           <div className="relative rounded-lg bg-[#93DDD4] py-6 px-6 text-center shadow">
             <p className="text-lg text-gray-800 font-medium">
               Welcome Photographer!
@@ -97,20 +93,6 @@ export default function PhotographerProfile() {
           </div>
         </section>
 
-        {/* Search */}
-        <section className="mb-10 flex justify-between items-center">
-          <div className="relative w-full max-w-md">
-            <IoSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-600" />
-            <input
-              type="text"
-              id="search"
-              name="search"
-              placeholder="Tìm kiếm album..."
-              className="w-full rounded-lg bg-white pl-10 pr-4 py-3 shadow-sm border border-gray-300 text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#93DDD4]"
-            />
-          </div>
-        </section>
-
         {/* Packages */}
         <section className="mb-12">
           <PackageSection photographerId={photographerId} />
@@ -120,7 +102,6 @@ export default function PhotographerProfile() {
         <section>
           <div className="mb-6 flex items-center justify-between">
             <h2 className="text-2xl font-bold uppercase text-gray-800">
-              Albums
             </h2>
           </div>
 

@@ -1,5 +1,5 @@
 import _ from "lodash";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 
 const footerContents = [
   {

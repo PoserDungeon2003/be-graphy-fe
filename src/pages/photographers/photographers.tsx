@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { IoChevronBackOutline } from "react-icons/io5";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { getAllPhotographers, Photographer } from "../../api/photographers";
 import PhotographerCard from "../../components/photographers/photographersCard";
 

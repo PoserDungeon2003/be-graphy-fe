@@ -1,5 +1,5 @@
 import _ from "lodash";
-import { NavLink } from "react-router";
+import { NavLink } from "react-router-dom";
 
 const navBar = [
   {

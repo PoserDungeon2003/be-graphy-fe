@@ -31,7 +31,6 @@ const PhotographyPackages = () => {
   }, []);
 
   const formatPackageForDisplay = (pkg: PackageModel) => {
-    console.log("formatPackageForDisplay", pkg.packageId);
     return {
       id: pkg.packageId,
       image: "https://cdn.5280.com/2024/10/WEB_analogheroimage-960x720.jpg",
@@ -41,7 +40,7 @@ const PhotographyPackages = () => {
       // Các trường không có trong API sẽ được giả định
       discount: pkg.price > 300 ? "SALE OFF" : "",
       bestPrice: pkg.price <= 300,
-      duration: `${pkg.duration} phút`,
+      duration: `${pkg.duration} giờ`,
       photographerId: pkg.photographerId,
       createdAt: new Date(pkg.createdAt).toLocaleDateString("vi-VN"),
     };

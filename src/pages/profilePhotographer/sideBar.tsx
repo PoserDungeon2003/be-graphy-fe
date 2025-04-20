@@ -1,6 +1,6 @@
 import _ from "lodash";
 import { IoChevronBackOutline } from "react-icons/io5";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { Tab } from "../../types";
 
 interface SidebarProps {

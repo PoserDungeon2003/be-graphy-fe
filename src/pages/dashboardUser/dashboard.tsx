@@ -4,7 +4,7 @@ import { Line } from "@ant-design/charts";
 import { Card, Col, Row, Statistic, message } from "antd";
 import { useEffect, useState } from "react";
 import { IoChevronBackOutline } from "react-icons/io5";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { getUserBookingAnalytics } from "../../api/userDashboard/bookingAnalytics";
 import { BookingAnalytics } from "../../types";
 
@@ -76,7 +76,7 @@ const UserDashboard = () => {
   };
 
   return (
-    <div className="relative p-6">
+    <div className="relative min-h-screen bg-gradient-to-r from-[#cafbda] to-[#9bc1fb] p-6">
       <button
         onClick={() => navigate(-1)}
         className="absolute top-4 left-4 inline-flex items-center font-semibold text-[#9681FA]"
@@ -85,8 +85,8 @@ const UserDashboard = () => {
         Back
       </button>
 
-      <h2 className="mt-9 mb-5 text-2xl font-semibold text-gray-800">
-        User Dashboard
+      <h2 className="mt-9 mb-5 bg-gradient-to-r text-center from-[#6C63FF] via-[#9681FA] to-[#B8B8FF] bg-clip-text text-4xl font-extrabold text-transparent drop-shadow-md">
+        Dashboard Analysis Bookings
       </h2>
 
       <Row gutter={[16, 16]}>
@@ -112,9 +112,11 @@ const UserDashboard = () => {
         </Col>
       </Row>
 
-      <Card title="Monthly Analytics" className="mt-6" loading={loading}>
-        <Line {...config} />
-      </Card>
+      <div className="mt-6">
+        <Card title="Monthly Analytics" loading={loading}>
+          <Line {...config} />
+        </Card>
+      </div>
     </div>
   );
 };

@@ -2,11 +2,11 @@ import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import _ from "lodash";
 import {
-    IoFolderOutline,
-    IoReorderTwo,
-    IoShareSocialOutline,
+  IoFolderOutline,
+  IoReorderTwo,
+  IoShareSocialOutline,
 } from "react-icons/io5";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { Album } from "../../types";
 
 interface SortableAlbumProps {

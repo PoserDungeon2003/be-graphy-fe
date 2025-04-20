@@ -1,8 +1,8 @@
 import { notification } from "antd";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IoClose } from "react-icons/io5";
-import { useNavigate } from "react-router";
-import { createPackage } from "../../api/package";
+import { useNavigate } from "react-router-dom";
+import { createPackage, updatePackage } from "../../api/package";
 import { PackageModel } from "../../types";
 
 interface PackageModalProps {
@@ -10,12 +10,14 @@ interface PackageModalProps {
   onClose: () => void;
   onSave: () => void;
   photographerId: number;
+  editingPackage?: PackageModel | null;  // Nhận editingPackage từ props
 }
 
 export default function PackageModal({
   isOpen,
   onClose,
   onSave,
+  editingPackage,  // Nhận editingPackage từ props
 }: PackageModalProps) {
   const [packageData, setPackageData] = useState<
     Omit<PackageModel, "packageId" | "createdAt">
@@ -29,10 +31,29 @@ export default function PackageModal({
 
   const [error, setError] = useState("");
   const navigate = useNavigate();
-  const userProfile = JSON.parse(
-    localStorage.getItem("userProfile") || "{}"
-  )
+  const userProfile = JSON.parse(localStorage.getItem("userProfile") || "{}");
   const photographerId = userProfile.photographer.photographerId;
+
+  useEffect(() => {
+    if (editingPackage) {
+      setPackageData({
+        photographerId: editingPackage.photographerId,
+        packageName: editingPackage.packageName,
+        description: editingPackage.description,
+        price: editingPackage.price,
+        duration: editingPackage.duration,
+      });
+    } else {
+      // Reset lại form khi tạo mới
+      setPackageData({
+        photographerId,
+        packageName: "",
+        description: "",
+        price: 0,
+        duration: 1,
+      });
+    }
+  }, [editingPackage, photographerId]);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -54,25 +75,38 @@ export default function PackageModal({
 
     packageData.photographerId = photographerId;
 
-    const result = await createPackage(packageData as PackageModel);
+    let result;
+
+    if (editingPackage) {
+      // 👇 Cập nhật gói
+      result = await updatePackage({
+        ...editingPackage,
+        ...packageData,
+      });
+    } else {
+      // 👇 Tạo mới
+      result = await createPackage(packageData as PackageModel);
+    }
 
     if (result.success) {
       notification.success({
         message: "Thành công",
-        description: "Gói chụp ảnh đã được tạo thành công.",
+        description: editingPackage
+          ? "Gói chụp ảnh đã được cập nhật."
+          : "Gói chụp ảnh đã được tạo.",
       });
       onSave();
       onClose();
-      navigate(`/photographer/package`); // ⬅️ Chuyển hướng sau khi thành công
+      navigate(`/photographer/package`);
     } else {
-      setError(result.message || "Không thể tạo gói");
+      setError(result.message || "Không thể xử lý yêu cầu");
       notification.error({
         message: "Lỗi",
-        description: result.message || "Không thể tạo gói",
+        description: result.message || "Không thể xử lý yêu cầu",
       });
     }
   };
-  
+
   if (!isOpen) return null;
 
   return (
@@ -80,7 +114,7 @@ export default function PackageModal({
       <div className="w-full max-w-lg rounded-lg bg-white p-6">
         <div className="mb-4 flex items-center justify-between">
           <h2 className="text-2xl font-bold text-black">
-            Tạo gói chụp ảnh mới
+            {editingPackage ? "Chỉnh sửa gói chụp ảnh" : "Tạo gói chụp ảnh mới"}
           </h2>
           <button
             type="button"
@@ -141,7 +175,7 @@ export default function PackageModal({
 
             <div>
               <label className="mb-2 block font-medium text-black">
-                Thời lượng (phút)
+                Thời lượng (giờ)
               </label>
               <input
                 placeholder="Ex: 120"

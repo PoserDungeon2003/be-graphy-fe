@@ -80,7 +80,7 @@ const PhotographyPackagesDetails = () => {
               </div>
               <div>
                 <strong>Thời lượng:</strong>{" "}
-                {pkg.duration ? `${pkg.duration} phút` : "Đang cập nhật..."}
+                {pkg.duration ? `${pkg.duration} giờ` : "Đang cập nhật..."}
               </div>
               {/* <div>
                 <strong>Photographer ID:</strong>{" "}

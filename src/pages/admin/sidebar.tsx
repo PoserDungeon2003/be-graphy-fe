@@ -9,12 +9,11 @@ import { Link, useLocation } from "react-router-dom"; // Import useLocation
 const Sidebar = () => {
   const location = useLocation(); // Use the hook to get current location
   
-// Sidebar.tsx
-const menuItems = [
-  { name: "Transactions", path: "/admin/dashboard/wallet", icon: IoWalletOutline },
-  { name: "Customers", path: "admin/dashboard/customers", icon: IoPeopleOutline },
-  { name: "Bookings", path: "admin/dashboard/bookings", icon: IoCameraOutline },
-];
+  const menuItems = [
+    { name: "Transactions", path: "/admin/dashboard/wallet", icon: IoWalletOutline },
+    { name: "Customers", path: "/admin/dashboard/customers", icon: IoPeopleOutline },
+    { name: "Bookings", path: "/admin/dashboard/bookings", icon: IoCameraOutline },
+  ];
 
   return (
     <div className="h-full w-64 bg-gradient-to-b from-green-100 to-blue-200">

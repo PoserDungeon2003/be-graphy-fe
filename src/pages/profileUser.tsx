@@ -1,34 +1,34 @@
 import {
-  closestCenter,
-  DndContext,
-  DragEndEvent,
-  KeyboardSensor,
-  PointerSensor,
-  useSensor,
-  useSensors,
+    closestCenter,
+    DndContext,
+    DragEndEvent,
+    KeyboardSensor,
+    PointerSensor,
+    useSensor,
+    useSensors,
 } from "@dnd-kit/core";
 import {
-  arrayMove,
-  SortableContext,
-  sortableKeyboardCoordinates,
-  useSortable,
-  verticalListSortingStrategy,
+    arrayMove,
+    SortableContext,
+    sortableKeyboardCoordinates,
+    useSortable,
+    verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import _ from "lodash";
 import { useState } from "react";
 import {
-  IoAddCircleOutline,
-  IoChevronBackOutline,
-  IoFolderOutline,
-  IoLogoFacebook,
-  IoLogoTwitter,
-  IoReorderTwo,
-  IoSearch,
-  IoSettingsOutline,
-  IoShareSocialOutline,
+    IoAddCircleOutline,
+    IoChevronBackOutline,
+    IoFolderOutline,
+    IoLogoFacebook,
+    IoLogoTwitter,
+    IoReorderTwo,
+    IoSearch,
+    IoSettingsOutline,
+    IoShareSocialOutline,
 } from "react-icons/io5";
-import { Link, useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router-dom";
 
 const tabs = [
   {

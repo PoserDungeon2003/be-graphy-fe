@@ -175,7 +175,7 @@ const CreatePackage: React.FC = () => {
 
           <div className="w-1/2">
             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="duration">
-              Thời lượng (phút)
+              Thời lượng (giờ)
             </label>
             <input
               type="number"

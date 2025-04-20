@@ -79,10 +79,7 @@ export const getProfile = async (): Promise<ApiResponse<UserProfile>> => {
         Authorization: `Bearer ${token}`,
       },
     });
-
-    console.log("API Response:", response);
-    console.log("Response Data:", response.data);
-
+    
     return response.data;
   } catch (error: any) {
     console.error("Profile fetch error details:", error);

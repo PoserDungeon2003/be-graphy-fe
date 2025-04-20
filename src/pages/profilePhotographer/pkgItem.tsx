@@ -3,27 +3,36 @@ import { PackageModel } from "../../types";
 
 interface PackageItemProps {
   pkg: PackageModel;
+  onEdit: (pkg: PackageModel) => void;
 }
 
-export default function PackageItem({ pkg }: PackageItemProps) {
+export default function PackageItem({ pkg, onEdit }: PackageItemProps) {
   return (
-    <div className="mb-2 flex items-center rounded-lg bg-[#93DDD4] p-5">
-      <div className="flex w-1/3 flex-col px-4">
+    <div className="mb-2 flex items-center justify-between rounded-lg bg-[#93DDD4] p-5">
+      <div className="flex flex-col px-4">
         <h3 className="text-xl font-bold text-black">{pkg.packageName}</h3>
-        <p className="text-sm text-gray-700 mt-1">{pkg.description}</p>
+        <p className="mt-1 text-sm text-gray-700">{pkg.description}</p>
       </div>
-      <div className="flex flex-1 items-center gap-4 px-4">
-        <div className="bg-white rounded-md px-4 py-2 text-center">
-          <span className="block text-lg font-bold text-black">{pkg.price.toLocaleString()} VND</span>
-          <span className="text-sm text-gray-700">Giá</span>
+
+      <div className="flex items-center gap-4">
+        <div className="rounded-md bg-white px-4 py-1 text-center">
+          <span className="text-sm text-gray-700">Giá (VND)</span>
+          <span className="block text-lg font-bold text-black">
+            {pkg.price.toLocaleString()}
+          </span>
         </div>
-        <div className="bg-white rounded-md px-4 py-2 text-center">
-          <span className="block text-lg font-bold text-black">{pkg.duration} giờ</span>
-          <span className="text-sm text-gray-700">Thời lượng</span>
+        <div className="rounded-md bg-white px-4 py-1 text-center">
+          <span className="text-sm text-gray-700">Thời lượng (Giờ)</span>
+          <span className="block text-lg font-bold text-black">
+            {pkg.duration}
+          </span>
         </div>
-      </div>
-      <div className="ml-4 flex flex-col gap-4">
-        <IoSettingsOutline className="size-8 cursor-pointer text-black hover:text-gray-700" />
+
+        {/* Nút chỉnh sửa */}
+        <IoSettingsOutline
+          onClick={() => onEdit(pkg)}  // Truyền gói chụp ảnh vào hàm onEdit
+          className="size-6 cursor-pointer mx-4 text-black hover:text-gray-700"
+        />
       </div>
     </div>
   );

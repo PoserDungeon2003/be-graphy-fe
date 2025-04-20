@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { FaSignOutAlt, FaUser } from "react-icons/fa";
 import { GrAnalytics } from "react-icons/gr";
 import { IoNotifications, IoPerson, IoSearch } from "react-icons/io5";
-import { NavLink, useNavigate } from "react-router";
+import { NavLink, useNavigate } from "react-router-dom";
 
 interface CustomJwtPayload {
   UserId: string;
